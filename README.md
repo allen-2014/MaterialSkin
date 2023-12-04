@@ -1,3 +1,10 @@
+# 更新说明
+2023.12.04
+- 支持.net framework 4.0
+- 加了MaterialToolTip
+- 增加中英文字体的支持
+- 对MaterialButton加上自带tooltip属性
+
 # MaterialSkin 2 for .NET WinForms
 
 Theming .NET WinForms, C# or VB.Net, to Google's Material Design Principles.
