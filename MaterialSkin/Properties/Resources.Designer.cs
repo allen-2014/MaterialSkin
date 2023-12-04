@@ -119,5 +119,55 @@ namespace MaterialSkin.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] SourceHanSansCN_Bold {
+            get {
+                object obj = ResourceManager.GetObject("SourceHanSansCN_Bold", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] SourceHanSansCN_Light {
+            get {
+                object obj = ResourceManager.GetObject("SourceHanSansCN_Light", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] SourceHanSansCN_Medium {
+            get {
+                object obj = ResourceManager.GetObject("SourceHanSansCN_Medium", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] SourceHanSansCN_Normal {
+            get {
+                object obj = ResourceManager.GetObject("SourceHanSansCN_Normal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] SourceHanSansCN_Regular {
+            get {
+                object obj = ResourceManager.GetObject("SourceHanSansCN_Regular", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

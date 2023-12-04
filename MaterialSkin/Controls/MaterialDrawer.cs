@@ -138,8 +138,9 @@
 
         public event DrawerStateHandler DrawerShowIconsWhenHiddenChanged;
 
-        public event EventHandler<Cursor> CursorUpdate;
-
+        //public event EventHandler<Cursor> CursorUpdate;
+        public event EventHandler<CurSorEventArgs> CursorUpdate;
+        
         // icons
         private Dictionary<string, TextureBrush> iconsBrushes;
 
@@ -711,7 +712,10 @@
                     Cursor = Cursors.Default;
             }
 
-            if (previousCursor != Cursor) CursorUpdate?.Invoke(this, Cursor);
+            //if (previousCursor != Cursor) CursorUpdate?.Invoke(this, Cursor);
+            CurSorEventArgs curSorEventArgs = new CurSorEventArgs();
+            curSorEventArgs.Cursor = Cursor;
+            if (previousCursor != Cursor) CursorUpdate?.Invoke(this, curSorEventArgs);
 
         }
 
@@ -731,7 +735,10 @@
             if (MouseState != MouseState.DOWN)
             {
                 Cursor = Cursors.Default;
-                CursorUpdate?.Invoke(this, Cursor);
+                //CursorUpdate?.Invoke(this, Cursor);
+                CurSorEventArgs curSorEventArgs = new CurSorEventArgs();
+                curSorEventArgs.Cursor = Cursor;
+                CursorUpdate?.Invoke(this, curSorEventArgs);
             }
 
             if (AutoShow)
@@ -776,4 +783,10 @@
             }
         }
     }
+
+    public class CurSorEventArgs : EventArgs
+    {
+        public Cursor Cursor;
+    }
+
 }

@@ -314,12 +314,14 @@
             {
                 if (!Items[e.Index].GetType().Equals(typeof(DataRowView)))
                 {
-                    var item = Items[e.Index].GetType().GetProperty(DisplayMember).GetValue(Items[e.Index]);
+                    //var item = Items[e.Index].GetType().GetProperty(DisplayMember).GetValue(Items[e.Index]);
+                    var item = Items[e.Index].GetType().GetProperty(DisplayMember).GetValue(Items[e.Index], null);
                     Text = item.ToString();
                 }
                 else
                 {
-                    var table = ((DataRow)Items[e.Index].GetType().GetProperty("Row").GetValue(Items[e.Index])).Table;
+                    //var table = ((DataRow)Items[e.Index].GetType().GetProperty("Row").GetValue(Items[e.Index])).Table;
+                    var table = ((DataRow)Items[e.Index].GetType().GetProperty("Row").GetValue(Items[e.Index], null)).Table;
                     Text = table.Rows[e.Index][DisplayMember].ToString();
                 }
             }

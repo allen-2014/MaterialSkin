@@ -22,9 +22,11 @@
         private const int HEIGHTDEFAULT = 36;
         private const int HEIGHTDENSE = 32;
 
+        
+
         // icons
         private TextureBrush iconsBrushes;
-        
+
         /// <summary>
         /// Gets or sets the Depth
         /// </summary>
@@ -55,6 +57,8 @@
             Default,
             Dense
         }
+
+        
 
         [Browsable(false)]
         public Color NoAccentTextColor { get; set; }
@@ -99,16 +103,105 @@
         public MaterialButtonDensity Density
         {
             get { return _density; }
-            set 
-            { 
+            set
+            {
                 _density = value;
-                if (_density== MaterialButtonDensity.Dense)
+                if (_density == MaterialButtonDensity.Dense)
                     Size = new Size(Size.Width, HEIGHTDENSE);
                 else
                     Size = new Size(Size.Width, HEIGHTDEFAULT);
                 Invalidate();
             }
         }
+
+        [Category("Material Skin")]
+        public MaterialToolTipPlacement ToolTipPlacement
+        {
+            get
+            {
+                return toolTipPlacement;
+            }
+            set
+            {
+                toolTipPlacement = value;
+                Invalidate();
+            }
+        }
+
+        private string toolTipCaption = string.Empty;
+        [Category("Material Skin")]
+        [Description("Default tooltip caption")]
+        public string ToolTipCaption
+        {
+            get
+            {
+                return toolTipCaption;
+            }
+            set
+            {
+                toolTipCaption = value;
+                //if (materialToolTip == null)
+                //{
+                //    materialToolTip = new MaterialToolTip();
+                //}
+                Invalidate();
+                //if (!string.IsNullOrWhiteSpace(toolTipCaption))
+                //{
+                //    //var mToolTip = toolTip as MaterialToolTip;
+                //    //if (mToolTip != null)
+                //    //    mToolTip.SetToolTip(this, toolTipCaption);
+                //    //else
+                //    //    toolTip.SetToolTip(this, toolTipCaption);
+                //    Invalidate();
+                //}
+            }
+        }
+
+        private int toolTipDuration = 0;
+        [Category("Material Skin")]
+        [Description("An System.Int32 containing the duration, in milliseconds, to display the ToolTip.")]
+        public int ToolTipDuration
+        {
+            get { return toolTipDuration; }
+            set 
+            {
+                if (value <= 0)
+                {
+                    toolTipDuration = 0;
+                    return;
+                }
+                toolTipDuration = value;
+                Invalidate();
+            }
+        }
+
+        //
+        private MaterialToolTip materialToolTip = default;
+        [Category("Behavior")]
+        public MaterialToolTip MaterialToolTip
+        {
+            get
+            {
+                return materialToolTip;
+            }
+            set
+            {
+                materialToolTip = value;
+                Invalidate();
+                //if (toolTip != null)
+                //{
+                //    var mToolTip = toolTip as MaterialToolTip;
+                //    if (mToolTip != null)
+                //        this.materialToolTip = mToolTip;
+                //}
+                //else
+                //{
+                //    this.materialToolTip = new MaterialToolTip();
+                //}
+                //this.materialToolTip = null;
+            }
+        }
+
 
         public enum CharacterCasingEnum
         {
@@ -200,6 +293,8 @@
         private MaterialButtonType type;
         private MaterialButtonDensity _density;
 
+        private MaterialToolTipPlacement toolTipPlacement = MaterialToolTipPlacement.BottomCenter;
+
         [Category("Material Skin")]
         /// <summary>
         /// Gets or sets the Icon
@@ -274,6 +369,38 @@
             AutoSize = true;
             Margin = new Padding(4, 6, 4, 6);
             Padding = new Padding(0);
+
+            this.MouseEnter += MaterialButton_MouseEnter;
+            this.MouseLeave += MaterialButton_MouseLeave;
+
+        }
+
+        public void UpdateMaterialToolTipColor(Color newForeColor, Color newBackColor)
+        {
+            if (this.materialToolTip == null || newForeColor == null || newBackColor == null) return;
+            this.materialToolTip.ForeColor = newForeColor;
+            
+            this.materialToolTip.BackColor = newBackColor;
+
+        }
+        private void MaterialButton_MouseLeave(object sender, EventArgs e)
+        {
+            if (this.materialToolTip != null && !string.IsNullOrWhiteSpace(this.toolTipCaption))
+            {
+                this.materialToolTip.Hide(this);
+            }
+        }
+
+        private void MaterialButton_MouseEnter(object sender, EventArgs e)
+        {
+            if (this.materialToolTip != null && !string.IsNullOrWhiteSpace(this.toolTipCaption))
+            {
+                if(toolTipDuration <= 0)
+                    this.materialToolTip.Show(this.toolTipCaption, this, toolTipPlacement);
+                else
+                    this.materialToolTip.Show(this.toolTipCaption, this, toolTipDuration, toolTipPlacement);
+            }
+            
         }
 
         /// <summary>
@@ -473,7 +600,29 @@
                     SkinManager.ColorScheme.PrimaryColor)).RemoveAlpha()))) // Normal or Emphasis without accent
                 {
                     g.FillPath(hoverBrush, buttonPath);
+
+                    ////
+                    //SizeF toopTipSize = default; 
+                    //if (!string.IsNullOrEmpty(toolTipCaption))
+                    //{
+                    //    toopTipSize = g.MeasureString(toolTipCaption.ToUpper(), SkinManager.getFontByType(MaterialSkinManager.fontType.Caption));
+                    //    toopTipSize.Width += 8;
+                    //    toopTipSize.Height += 12;
+                    //}
+                    //else
+                    //{
+                    //    toopTipSize.Width = 0;
+                    //    toopTipSize.Height = 0;
+                    //}
+                    //RectangleF tooltipRectF = new RectangleF(10, 10, toopTipSize.Width, toopTipSize.Height);
+                    //GraphicsPath tooltipPath = DrawHelper.CreateRoundRect(tooltipRectF, 4);
+                    //g.FillPath(Brushes.White, tooltipPath);
+                    
+
                 }
+
+                
+
             }
 
             //Focus
@@ -678,5 +827,7 @@
                 }
             };
         }
+
     }
+
 }

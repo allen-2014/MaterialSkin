@@ -570,22 +570,41 @@ namespace MaterialSkin.Controls
             {
                 _drawerShowHideAnimManager.StartNewAnimation(AnimationDirection.Out);
             };
-            drawerControl.CursorUpdate += (sender, drawerCursor) =>
+
+            //drawerControl.CursorUpdate += (sender, drawerCursor) =>
+            //{
+            //    if (Sizable && !Maximized)
+            //    {
+            //        if (drawerCursor == Cursors.SizeNESW)
+            //            _resizeDir = ResizeDirection.BottomLeft;
+            //        else if (drawerCursor == Cursors.SizeWE)
+            //            _resizeDir = ResizeDirection.Left;
+            //        else if (drawerCursor == Cursors.SizeNS)
+            //            _resizeDir = ResizeDirection.Bottom;
+            //        else
+            //            _resizeDir = ResizeDirection.None;
+            //    }
+            //    else
+            //        _resizeDir = ResizeDirection.None;
+            //    Cursor = drawerCursor;
+            //};
+
+            drawerControl.CursorUpdate += (sender, drawerCursorEventArgs) =>
             {
                 if (Sizable && !Maximized)
                 {
-                    if (drawerCursor == Cursors.SizeNESW)
+                    if (drawerCursorEventArgs.Cursor == Cursors.SizeNESW)
                         _resizeDir = ResizeDirection.BottomLeft;
-                    else if (drawerCursor == Cursors.SizeWE)
+                    else if (drawerCursorEventArgs.Cursor == Cursors.SizeWE)
                         _resizeDir = ResizeDirection.Left;
-                    else if (drawerCursor == Cursors.SizeNS)
+                    else if (drawerCursorEventArgs.Cursor == Cursors.SizeNS)
                         _resizeDir = ResizeDirection.Bottom;
                     else
                         _resizeDir = ResizeDirection.None;
                 }
                 else
                     _resizeDir = ResizeDirection.None;
-                Cursor = drawerCursor;
+                Cursor = drawerCursorEventArgs.Cursor;
             };
 
             // Form Padding corrections

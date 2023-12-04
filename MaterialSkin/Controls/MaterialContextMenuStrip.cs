@@ -7,7 +7,7 @@
     using System.Drawing.Text;
     using System.Windows.Forms;
 
-    [ToolboxItem(false)]
+    //[ToolboxItem(false)]
     public class MaterialContextMenuStrip : ContextMenuStrip, IMaterialControl
     {
         //Properties for managing the material design properties

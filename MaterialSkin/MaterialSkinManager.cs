@@ -48,6 +48,11 @@
             addFont(Resources.Roboto_Medium);
             addFont(Resources.Roboto_Bold);
             addFont(Resources.Roboto_Black);
+            //
+            //addFont(Resources.SourceHanSansCN_Light);
+            //addFont(Resources.SourceHanSansCN_Regular);
+            //addFont(Resources.SourceHanSansCN_Medium);
+            //addFont(Resources.SourceHanSansCN_Bold);
 
             RobotoFontFamilies = new Dictionary<string, FontFamily>();
             foreach (FontFamily ff in privateFontCollection.Families.ToArray())
@@ -55,10 +60,10 @@
                 RobotoFontFamilies.Add(ff.Name.Replace(' ', '_'), ff);
             }
 
-            // create and save font handles for GDI
-            logicalFonts = new Dictionary<string, IntPtr>(18);
-            logicalFonts.Add("H1", createLogicalFont("Roboto Light", 96, NativeTextRenderer.logFontWeight.FW_LIGHT));
-            logicalFonts.Add("H2", createLogicalFont("Roboto Light", 60, NativeTextRenderer.logFontWeight.FW_LIGHT));
+            //create and save font handles for GDI
+           logicalFonts = new Dictionary<string, IntPtr>(18);
+           logicalFonts.Add("H1", createLogicalFont("Roboto Light", 96, NativeTextRenderer.logFontWeight.FW_LIGHT));
+           logicalFonts.Add("H2", createLogicalFont("Roboto Light", 60, NativeTextRenderer.logFontWeight.FW_LIGHT));
             logicalFonts.Add("H3", createLogicalFont("Roboto", 48, NativeTextRenderer.logFontWeight.FW_REGULAR));
             logicalFonts.Add("H4", createLogicalFont("Roboto", 34, NativeTextRenderer.logFontWeight.FW_REGULAR));
             logicalFonts.Add("H5", createLogicalFont("Roboto", 24, NativeTextRenderer.logFontWeight.FW_REGULAR));
@@ -77,6 +82,29 @@
             logicalFonts.Add("textBox14", createLogicalFont("Roboto", 14, NativeTextRenderer.logFontWeight.FW_REGULAR));
             logicalFonts.Add("textBox13", createLogicalFont("Roboto Medium", 13, NativeTextRenderer.logFontWeight.FW_MEDIUM));
             logicalFonts.Add("textBox12", createLogicalFont("Roboto Medium", 12, NativeTextRenderer.logFontWeight.FW_MEDIUM));
+
+
+            //logicalFonts = new Dictionary<string, IntPtr>(18);
+            //logicalFonts.Add("H1", createLogicalFont("思源黑体 CN Regular", 60, NativeTextRenderer.logFontWeight.FW_LIGHT));
+            //logicalFonts.Add("H2", createLogicalFont("思源黑体 CN Regular", 48, NativeTextRenderer.logFontWeight.FW_LIGHT));
+            //logicalFonts.Add("H3", createLogicalFont("思源黑体 CN Regular", 34, NativeTextRenderer.logFontWeight.FW_NORMAL));
+            //logicalFonts.Add("H4", createLogicalFont("思源黑体 CN Regular", 30, NativeTextRenderer.logFontWeight.FW_NORMAL));
+            //logicalFonts.Add("H5", createLogicalFont("思源黑体 CN Regular", 24, NativeTextRenderer.logFontWeight.FW_NORMAL));
+            //logicalFonts.Add("H6", createLogicalFont("思源黑体 CN Regular", 20, NativeTextRenderer.logFontWeight.FW_NORMAL));
+            //logicalFonts.Add("Subtitle1", createLogicalFont("思源黑体 CN Regular", 16, NativeTextRenderer.logFontWeight.FW_NORMAL));
+            //logicalFonts.Add("Subtitle2", createLogicalFont("思源黑体 CN Regular", 14, NativeTextRenderer.logFontWeight.FW_MEDIUM));
+            //logicalFonts.Add("SubtleEmphasis", createLogicalFont("思源黑体 CN Regular", 12, NativeTextRenderer.logFontWeight.FW_NORMAL, 1));
+            //logicalFonts.Add("Body1", createLogicalFont("思源黑体 CN Medium", 16, NativeTextRenderer.logFontWeight.FW_NORMAL));
+            //logicalFonts.Add("Body2", createLogicalFont("思源黑体 CN Medium", 14, NativeTextRenderer.logFontWeight.FW_MEDIUM));
+            //logicalFonts.Add("Button", createLogicalFont("思源黑体 CN Bold", 14, NativeTextRenderer.logFontWeight.FW_MEDIUM));
+            //logicalFonts.Add("Caption", createLogicalFont("思源黑体 CN Regular", 12, NativeTextRenderer.logFontWeight.FW_REGULAR));
+            //logicalFonts.Add("Overline", createLogicalFont("思源黑体 CN Regular", 10, NativeTextRenderer.logFontWeight.FW_REGULAR));
+            //// Logical fonts for textbox animation
+            //logicalFonts.Add("textBox16", createLogicalFont("思源黑体 CN Regular", 16, NativeTextRenderer.logFontWeight.FW_REGULAR));
+            //logicalFonts.Add("textBox15", createLogicalFont("思源黑体 CN Regular", 15, NativeTextRenderer.logFontWeight.FW_REGULAR));
+            //logicalFonts.Add("textBox14", createLogicalFont("思源黑体 CN Regular", 14, NativeTextRenderer.logFontWeight.FW_REGULAR));
+            //logicalFonts.Add("textBox13", createLogicalFont("思源黑体 CN Regular", 13, NativeTextRenderer.logFontWeight.FW_MEDIUM));
+            //logicalFonts.Add("textBox12", createLogicalFont("思源黑体 CN Regular", 12, NativeTextRenderer.logFontWeight.FW_MEDIUM));
         }
 
         // Destructor
@@ -319,7 +347,7 @@
 
                 case fontType.Subtitle2:
                     return new Font(RobotoFontFamilies["Roboto_Medium"], 14f, FontStyle.Bold, GraphicsUnit.Pixel);
-                
+
                 case fontType.SubtleEmphasis:
                     return new Font(RobotoFontFamilies["Roboto"], 12f, FontStyle.Italic, GraphicsUnit.Pixel);
 
@@ -339,6 +367,53 @@
                     return new Font(RobotoFontFamilies["Roboto"], 10f, FontStyle.Regular, GraphicsUnit.Pixel);
             }
             return new Font(RobotoFontFamilies["Roboto"], 14f, FontStyle.Regular, GraphicsUnit.Pixel);
+
+
+            //switch (type)
+            //{
+            //    case fontType.H1:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 96f, FontStyle.Regular, GraphicsUnit.Pixel);
+
+            //    case fontType.H2:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 60f, FontStyle.Regular, GraphicsUnit.Pixel);
+
+            //    case fontType.H3:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 48f, FontStyle.Bold, GraphicsUnit.Pixel);
+
+            //    case fontType.H4:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 34f, FontStyle.Bold, GraphicsUnit.Pixel);
+
+            //    case fontType.H5:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 24f, FontStyle.Bold, GraphicsUnit.Pixel);
+
+            //    case fontType.H6:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 20f, FontStyle.Regular, GraphicsUnit.Pixel);
+
+            //    case fontType.Subtitle1:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 16f, FontStyle.Regular, GraphicsUnit.Pixel);
+
+            //    case fontType.Subtitle2:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 14f, FontStyle.Bold, GraphicsUnit.Pixel);
+
+            //    case fontType.SubtleEmphasis:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 12f, FontStyle.Italic, GraphicsUnit.Pixel);
+
+            //    case fontType.Body1:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Medium"], 16f, FontStyle.Regular, GraphicsUnit.Pixel);
+
+            //    case fontType.Body2:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Medium"], 14f, FontStyle.Regular, GraphicsUnit.Pixel);
+
+            //    case fontType.Button:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Bold"], 14f, FontStyle.Bold, GraphicsUnit.Pixel);
+
+            //    case fontType.Caption:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 12f, FontStyle.Regular, GraphicsUnit.Pixel);
+
+            //    case fontType.Overline:
+            //        return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 12f, FontStyle.Regular, GraphicsUnit.Pixel);
+            //}
+            //return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 14f, FontStyle.Bold, GraphicsUnit.Pixel);
         }
 
         /// <summary>
@@ -448,6 +523,16 @@
             {
                 controlToUpdate.BackColor = newBackColor;
                 controlToUpdate.ForeColor = TextHighEmphasisColor;
+                //button's tooltip color
+                if(controlToUpdate is MaterialButton)
+                {
+                    ((MaterialButton)controlToUpdate).UpdateMaterialToolTipColor(TextHighEmphasisColor, newBackColor);
+                    if(((MaterialButton)controlToUpdate).MaterialToolTip != null)
+                    {
+                        ((MaterialButton)controlToUpdate).MaterialToolTip.BackColor = newBackColor;
+                        ((MaterialButton)controlToUpdate).MaterialToolTip.ForeColor = TextHighEmphasisColor;
+                    }
+                }
             }
 
             // Other Generic control not part of material skin
@@ -476,7 +561,8 @@
             foreach (ToolStripItem control in toolStrip.Items)
             {
                 control.BackColor = newBackColor;
-                if (control is MaterialToolStripMenuItem && (control as MaterialToolStripMenuItem).HasDropDown)
+                //if (control is MaterialToolStripMenuItem && (control as MaterialToolStripMenuItem).HasDropDown)
+                if (control is MaterialToolStripMenuItem)
                 {
                     //recursive call
                     UpdateToolStrip((control as MaterialToolStripMenuItem).DropDown, newBackColor);
