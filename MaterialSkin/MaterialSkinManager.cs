@@ -337,20 +337,7 @@
             zh_CN
         }
 
-        public Font getFontByTypeWithLanguage(fontType type)
-        {
-            switch(langType)
-            {
-                case LanguageType.en_US:
-                    return getFontByType(type);
-                    
-                case LanguageType.zh_CN:
-                    return getFontByTypeZH(type);
-                default:
-                    return getFontByType(type);
 
-            }
-        }
         public Font getFontByType(fontType type)
         {
             if (langType == LanguageType.en_US)
@@ -497,7 +484,7 @@
                     return new Font(RobotoFontFamilies["思源黑体_CN_Bold"], 14f, FontStyle.Bold, GraphicsUnit.Pixel);
 
                 case fontType.Caption:
-                    return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 14f, FontStyle.Regular, GraphicsUnit.Pixel);
+                    return new Font(RobotoFontFamilies["思源黑体_CN_Bold"], 12f, FontStyle.Bold, GraphicsUnit.Pixel);
 
                 case fontType.Overline:
                     return new Font(RobotoFontFamilies["思源黑体_CN_Regular"], 12f, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -583,6 +570,27 @@
             {
                 UpdateControlBackColor(e.Control, BackdropColor);
             };
+        }
+
+        //lang font
+        public void ChangeControlLangFont(Control controlToUpdate)
+        {
+            UpdateControlLangFont(controlToUpdate);
+        }
+
+        //update non-material control language font alone
+        private void UpdateControlLangFont(Control controlToUpdate)
+        {
+            if (!controlToUpdate.IsMaterialControl() && controlToUpdate.Parent != null)
+            {
+                controlToUpdate.Font = getFontByType(MaterialSkinManager.fontType.Body1);
+            }
+            // Recursive call to control's children
+            foreach (Control control in controlToUpdate.Controls)
+            {
+                UpdateControlLangFont(control);
+            }
+
         }
 
         public void RemoveFormToManage(MaterialForm materialForm)
@@ -671,5 +679,7 @@
                 }
             }
         }
+
+        
     }
 }

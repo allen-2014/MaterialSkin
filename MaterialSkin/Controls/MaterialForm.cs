@@ -375,7 +375,21 @@ namespace MaterialSkin.Controls
         private Rectangle _actionBarBounds => new Rectangle(ClientRectangle.X, ClientRectangle.Y + STATUS_BAR_HEIGHT, ClientSize.Width, ACTION_BAR_HEIGHT);
         private Rectangle _drawerButtonBounds => new Rectangle(ClientRectangle.X + (SkinManager.FORM_PADDING / 2) + 3, STATUS_BAR_HEIGHT + (ACTION_BAR_HEIGHT / 2) - (ACTION_BAR_HEIGHT_DEFAULT / 2), ACTION_BAR_HEIGHT_DEFAULT, ACTION_BAR_HEIGHT_DEFAULT);
         private Rectangle _statusBarBounds => new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientSize.Width, STATUS_BAR_HEIGHT);
+
+        //private Rectangle _minButtonBounds;// = new Rectangle(ClientSize.Width - 3 * STATUS_BAR_BUTTON_WIDTH, ClientRectangle.Y, STATUS_BAR_BUTTON_WIDTH, STATUS_BAR_HEIGHT);
+        //private Rectangle _maxButtonBounds;// = new Rectangle(ClientSize.Width - 2 * STATUS_BAR_BUTTON_WIDTH, ClientRectangle.Y, STATUS_BAR_BUTTON_WIDTH, STATUS_BAR_HEIGHT);
+        //private Rectangle _xButtonBounds;// = new Rectangle(ClientSize.Width - STATUS_BAR_BUTTON_WIDTH, ClientRectangle.Y, STATUS_BAR_BUTTON_WIDTH, STATUS_BAR_HEIGHT);
+        //private Rectangle _actionBarBounds;// = new Rectangle(ClientRectangle.X, ClientRectangle.Y + STATUS_BAR_HEIGHT, ClientSize.Width, ACTION_BAR_HEIGHT);
+        //private Rectangle _drawerButtonBounds;// = new Rectangle(ClientRectangle.X + (SkinManager.FORM_PADDING / 2) + 3, STATUS_BAR_HEIGHT + (ACTION_BAR_HEIGHT / 2) - (ACTION_BAR_HEIGHT_DEFAULT / 2), ACTION_BAR_HEIGHT_DEFAULT, ACTION_BAR_HEIGHT_DEFAULT);
+        //private Rectangle _statusBarBounds;// = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientSize.Width, STATUS_BAR_HEIGHT);
+
+        //private bool _maximized;
+        //private Size _previousSize;
+        //private Point _previousLocation;
+        //private bool _headerMouseDown;
+
         private Rectangle _drawerIconRect;
+
 
         private bool Maximized
         {
@@ -388,6 +402,8 @@ namespace MaterialSkin.Controls
                     WindowState = FormWindowState.Maximized;
                 else
                     WindowState = FormWindowState.Normal;
+
+                
             }
         }
         private Point _animationSource;
@@ -856,7 +872,7 @@ namespace MaterialSkin.Controls
             }
             // Double click to maximize
             else if (message == WM.LeftButtonDoubleClick && isOverCaption)
-            { 
+            {
                 Maximized = !Maximized;
             }
             // Treat the Caption as if it was Non-Client
@@ -880,7 +896,7 @@ namespace MaterialSkin.Controls
 
                     // Pass the command as a WM_SYSCOMMAND message
                     SendMessage(Handle, (int)WM.SystemCommand, id, 0);
-                    
+
                     // restore user defined ContextMenuStrip
                     base.ContextMenuStrip = user_cms;
                 }
@@ -889,8 +905,16 @@ namespace MaterialSkin.Controls
 
         protected override void OnMove(EventArgs e)
         {
+
             // Empty Point ensures the screen maximizes to the top left of the current screen
-            MaximizedBounds = new Rectangle(Point.Empty, Screen.GetWorkingArea(Location).Size);
+            //MaximizedBounds = new Rectangle(Point.Empty, Screen.GetWorkingArea(Location).Size);
+            //left top point have to be re-computed
+            var monitorHandle = MonitorFromWindow(Handle, MONITOR_DEFAULTTONEAREST);
+            var monitorInfo = new MONITORINFOEX();
+            GetMonitorInfo(new HandleRef(null, monitorHandle), monitorInfo);
+            
+            //Location = new Point(monitorInfo.rcWork.left, monitorInfo.rcWork.top);
+            MaximizedBounds = new Rectangle(new Point(monitorInfo.rcWork.left, monitorInfo.rcWork.top), Screen.GetWorkingArea(Location).Size);
             base.OnMove(e);
         }
 
@@ -903,6 +927,7 @@ namespace MaterialSkin.Controls
             if (e.Button == MouseButtons.Left && !Maximized && _resizeCursors.Contains(Cursor))
                 ResizeForm(_resizeDir);
             base.OnMouseDown(e);
+
         }
 
         protected override void OnMouseEnter(EventArgs e)
@@ -992,6 +1017,63 @@ namespace MaterialSkin.Controls
             }
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int left;
+            public int top;
+            public int right;
+            public int bottom;
+
+            public int Width()
+            {
+                return right - left;
+            }
+
+            public int Height()
+            {
+                return bottom - top;
+            }
+        }
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 4)]
+        public class MONITORINFOEX
+        {
+            public int cbSize = Marshal.SizeOf(typeof(MONITORINFOEX));
+            public RECT rcMonitor = new RECT();
+            public RECT rcWork = new RECT();
+            public int dwFlags = 0;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] szDevice = new char[32];
+        }
+        private const int MONITOR_DEFAULTTONEAREST = 2;
+        [DllImport("user32.dll")]
+        public static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        public static extern bool GetMonitorInfo(HandleRef hmonitor, [In, Out] MONITORINFOEX info);
+        //private void MaximizeWindow(bool maximize)
+        //{
+        //    if (!MaximizeBox || !ControlBox) return;
+
+        //    _maximized = maximize;
+
+        //    if (maximize)
+        //    {
+        //        var monitorHandle = MonitorFromWindow(Handle, MONITOR_DEFAULTTONEAREST);
+        //        var monitorInfo = new MONITORINFOEX();
+        //        GetMonitorInfo(new HandleRef(null, monitorHandle), monitorInfo);
+        //        _previousSize = Size;
+        //        _previousLocation = Location;
+        //        Size = new Size(monitorInfo.rcWork.Width(), monitorInfo.rcWork.Height());
+        //        Location = new Point(monitorInfo.rcWork.left, monitorInfo.rcWork.top);
+        //    }
+        //    else
+        //    {
+        //        Size = _previousSize;
+        //        Location = _previousLocation;
+        //    }
+
+        //}
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (DesignMode)
@@ -1000,6 +1082,7 @@ namespace MaterialSkin.Controls
 
             base.OnMouseUp(e);
             ReleaseCapture();
+
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -1149,7 +1232,7 @@ namespace MaterialSkin.Controls
                     g.FillRectangle(downBrush, _drawerButtonBounds);
 
                 _drawerIconRect = new Rectangle(SkinManager.FORM_PADDING / 2, STATUS_BAR_HEIGHT, ACTION_BAR_HEIGHT_DEFAULT, ACTION_BAR_HEIGHT);
-                // Ripple
+                //Ripple
                 if (_clickAnimManager.IsAnimating())
                 {
                     var clickAnimProgress = _clickAnimManager.GetProgress();
@@ -1196,7 +1279,7 @@ namespace MaterialSkin.Controls
                 //Form title
                 using (NativeTextRenderer NativeText = new NativeTextRenderer(g))
                 {
-                    Rectangle textLocation = new Rectangle(DrawerTabControl != null ? TITLE_LEFT_PADDING : TITLE_LEFT_PADDING - (ICON_SIZE + (ACTION_BAR_PADDING*2)), STATUS_BAR_HEIGHT, ClientSize.Width, ACTION_BAR_HEIGHT);
+                    Rectangle textLocation = new Rectangle(DrawerTabControl != null ? TITLE_LEFT_PADDING : TITLE_LEFT_PADDING - (ICON_SIZE + (ACTION_BAR_PADDING * 2)), STATUS_BAR_HEIGHT, ClientSize.Width, ACTION_BAR_HEIGHT);
                     NativeText.DrawTransparentText(Text, SkinManager.getLogFontByType(MaterialSkinManager.fontType.H6),
                         SkinManager.ColorScheme.TextColor,
                         textLocation.Location,
@@ -1204,6 +1287,7 @@ namespace MaterialSkin.Controls
                         NativeTextRenderer.TextAlignFlags.Left | NativeTextRenderer.TextAlignFlags.Middle);
                 }
             }
+
         }
         #endregion
 
