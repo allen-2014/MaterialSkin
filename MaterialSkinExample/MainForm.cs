@@ -275,7 +275,9 @@ namespace MaterialSkinExample
         
         private void materialButton25_Click(object sender, EventArgs e)
         {
-            MaterialDialog materialDialog = new MaterialDialog(this,"Dialog Title", "Dialogs inform users about a task and can contain critical information, require decisions, or involve multiple tasks.", "OK", true, "Cancel");
+            //MaterialDialog materialDialog = new MaterialDialog(this, "Dialog Title", "Dialogs inform users about a task and can contain critical information, require decisions, or involve multiple tasks.", "OK", true, "Cancel");
+            //DialogResult result = materialDialog.ShowDialog(this);
+            FormMDialog2 materialDialog = new FormMDialog2(this);
             DialogResult result = materialDialog.ShowDialog(this);
 
             MaterialSnackBar SnackBarMessage = new MaterialSnackBar(result.ToString(),750);

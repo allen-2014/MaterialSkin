@@ -50,6 +50,9 @@
     <Compile Include="Controls\BaseTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MaterialDialog2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Controls\MaterialToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -164,6 +167,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\FlexibleMaterialDialog.resx">
       <DependentUpon>FlexibleMaterialDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MaterialDialog2.resx">
+      <DependentUpon>MaterialDialog2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MaterialForm.resx">
       <DependentUpon>MaterialForm.cs</DependentUpon>

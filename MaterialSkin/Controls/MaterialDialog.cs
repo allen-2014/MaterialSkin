@@ -201,6 +201,7 @@
         /// </summary>
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
         {
+            base.OnPaint(e);
 
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -236,9 +237,9 @@
 
             Rectangle textRect = new Rectangle(
                 LEFT_RIGHT_PADDING,
-                _header_Height+17,
+                _header_Height + 17,
                 RectWidth,
-                RectHeight +19);
+                RectHeight + 19);
 
             //Draw  Text
             using (NativeTextRenderer NativeText = new NativeTextRenderer(g))

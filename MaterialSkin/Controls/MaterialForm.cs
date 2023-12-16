@@ -209,7 +209,7 @@ namespace MaterialSkin.Controls
         /// <summary>
         /// The states a button can be in
         /// </summary>
-        private enum ButtonState
+        protected enum ButtonState
         {
             XOver,
             MaxOver,
