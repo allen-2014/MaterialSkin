@@ -4,6 +4,7 @@
 - 加了MaterialToolTip
 - 增加中英文字体的支持
 - 对MaterialButton加上自带tooltip属性
+
 2023.12.16
 - 增加可设计的 MaterialDialog2，在设计时可添加控件，以显示更多的内容
 
