@@ -31,6 +31,12 @@ namespace MaterialSkinExample
         {
             this.mBtnOK = new MaterialSkin.Controls.MaterialButton();
             this.mBtnCancel = new MaterialSkin.Controls.MaterialButton();
+            this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel38 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialSwitch1 = new MaterialSkin.Controls.MaterialSwitch();
+            this.materialCheckbox1 = new MaterialSkin.Controls.MaterialCheckbox();
+            this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mBtnOK
@@ -43,7 +49,7 @@ namespace MaterialSkinExample
             this.mBtnOK.DrawShadows = false;
             this.mBtnOK.HighEmphasis = true;
             this.mBtnOK.Icon = null;
-            this.mBtnOK.Location = new System.Drawing.Point(527, 163);
+            this.mBtnOK.Location = new System.Drawing.Point(568, 269);
             this.mBtnOK.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mBtnOK.MaterialToolTip = null;
             this.mBtnOK.MouseState = MaterialSkin.MouseState.HOVER;
@@ -69,7 +75,7 @@ namespace MaterialSkinExample
             this.mBtnCancel.DrawShadows = false;
             this.mBtnCancel.HighEmphasis = true;
             this.mBtnCancel.Icon = null;
-            this.mBtnCancel.Location = new System.Drawing.Point(389, 163);
+            this.mBtnCancel.Location = new System.Drawing.Point(430, 269);
             this.mBtnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mBtnCancel.MaterialToolTip = null;
             this.mBtnCancel.MouseState = MaterialSkin.MouseState.HOVER;
@@ -85,21 +91,104 @@ namespace MaterialSkinExample
             this.mBtnCancel.UseAccentColor = true;
             this.mBtnCancel.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // materialCard1
+            // 
+            this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialCard1.Controls.Add(this.materialLabel4);
+            this.materialCard1.Controls.Add(this.materialLabel38);
+            this.materialCard1.Depth = 0;
+            this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard1.Location = new System.Drawing.Point(261, 50);
+            this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard1.Name = "materialCard1";
+            this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard1.Size = new System.Drawing.Size(340, 187);
+            this.materialCard1.TabIndex = 2;
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel4.HighEmphasis = true;
+            this.materialLabel4.Location = new System.Drawing.Point(37, 42);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(229, 24);
+            this.materialLabel4.TabIndex = 3;
+            this.materialLabel4.Text = "Cards are also supported!";
+            // 
+            // materialLabel38
+            // 
+            this.materialLabel38.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialLabel38.Depth = 0;
+            this.materialLabel38.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel38.Location = new System.Drawing.Point(37, 77);
+            this.materialLabel38.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel38.Name = "materialLabel38";
+            this.materialLabel38.Size = new System.Drawing.Size(267, 67);
+            this.materialLabel38.TabIndex = 4;
+            this.materialLabel38.Text = "These are simple containers, but with a very nice shadow under them";
+            // 
+            // materialSwitch1
+            // 
+            this.materialSwitch1.AutoSize = true;
+            this.materialSwitch1.Depth = 0;
+            this.materialSwitch1.Location = new System.Drawing.Point(54, 104);
+            this.materialSwitch1.Margin = new System.Windows.Forms.Padding(0);
+            this.materialSwitch1.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialSwitch1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSwitch1.Name = "materialSwitch1";
+            this.materialSwitch1.Ripple = true;
+            this.materialSwitch1.Size = new System.Drawing.Size(173, 37);
+            this.materialSwitch1.TabIndex = 3;
+            this.materialSwitch1.Text = "materialSwitch1";
+            this.materialSwitch1.UseVisualStyleBackColor = true;
+            // 
+            // materialCheckbox1
+            // 
+            this.materialCheckbox1.AutoSize = true;
+            this.materialCheckbox1.Depth = 0;
+            this.materialCheckbox1.Location = new System.Drawing.Point(54, 189);
+            this.materialCheckbox1.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckbox1.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckbox1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckbox1.Name = "materialCheckbox1";
+            this.materialCheckbox1.ReadOnly = false;
+            this.materialCheckbox1.Ripple = true;
+            this.materialCheckbox1.Size = new System.Drawing.Size(171, 37);
+            this.materialCheckbox1.TabIndex = 4;
+            this.materialCheckbox1.Text = "materialCheckbox1";
+            this.materialCheckbox1.UseVisualStyleBackColor = true;
+            // 
+            // FormMDialog2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ButtonUseAccentColor = true;
-            this.ClientSize = new System.Drawing.Size(593, 208);
+            this.ClientSize = new System.Drawing.Size(642, 314);
+            this.Controls.Add(this.materialCheckbox1);
+            this.Controls.Add(this.materialSwitch1);
+            this.Controls.Add(this.materialCard1);
             this.Controls.Add(this.mBtnCancel);
             this.Controls.Add(this.mBtnOK);
             this.KeyPreview = true;
             this.MCancelButton = this.mBtnCancel;
             this.MValidationButton = this.mBtnOK;
-            this.Name = "Form1";
+            this.Name = "FormMDialog2";
+            this.ShowTitleDivideLine = true;
             this.Text = "Form1";
-            this.Title = "Title";
+            this.Title = "Dialog2 Title";
+            this.TitleAlign = MaterialSkin.Controls.TitleAlign.CenterMiddle;
+            this.materialCard1.ResumeLayout(false);
+            this.materialCard1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -107,5 +196,10 @@ namespace MaterialSkinExample
 
         private MaterialSkin.Controls.MaterialButton mBtnOK;
         private MaterialSkin.Controls.MaterialButton mBtnCancel;
+        private MaterialSkin.Controls.MaterialCard materialCard1;
+        private MaterialSkin.Controls.MaterialSwitch materialSwitch1;
+        private MaterialSkin.Controls.MaterialCheckbox materialCheckbox1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialLabel materialLabel38;
     }
 }

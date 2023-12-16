@@ -19,7 +19,7 @@ namespace MaterialSkin.Controls
         private const int BUTTON_HEIGHT = 36;
         private const int TEXT_TOP_PADDING = 17;
         private const int TEXT_BOTTOM_PADDING = 28;
-        private const int  MIN_HEADER_HEIGHT = 20;
+        private const int  MIN_HEADER_HEIGHT = 24;
         private int _header_Height = 40;
 
         private MaterialButton _validationButton = default;//new MaterialButton();
@@ -33,8 +33,50 @@ namespace MaterialSkin.Controls
         
 
         private ButtonState _buttonState = ButtonState.None;
-        private Rectangle _xButtonBounds => new Rectangle(Width - LEFT_RIGHT_PADDING, 0, LEFT_RIGHT_PADDING, LEFT_RIGHT_PADDING<_header_Height? LEFT_RIGHT_PADDING: _header_Height);
+        private Rectangle _xButtonBounds => new Rectangle(Width - (_header_Height + MIN_HEADER_HEIGHT) /2, (_header_Height - MIN_HEADER_HEIGHT) /2, MIN_HEADER_HEIGHT, MIN_HEADER_HEIGHT);
 
+
+        public new Region Region
+        {
+            get 
+            {
+                base.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 6, 6));
+                return base.Region;
+            }
+
+        }
+        public new int Height
+        {
+            get { return base.Height; }
+            set
+            {
+                int maxMinHeight = _header_Height > MIN_HEADER_HEIGHT ? _header_Height : MIN_HEADER_HEIGHT;
+                if (value < maxMinHeight)
+                {
+                    base.Height = maxMinHeight;
+                }
+                else
+                    base.Height = value;
+                
+                Invalidate();
+            }
+        }
+
+        private bool _ShowTitleDivideLine = false;
+        [Category("MaterialDialog2")]
+        public bool ShowTitleDivideLine
+        {
+            get
+            {
+                return _ShowTitleDivideLine;
+            }
+            set
+            {
+                _ShowTitleDivideLine = value;
+                
+                Invalidate();
+            }
+        }
 
         [Category("MaterialDialog2")]
         public string Title
@@ -43,9 +85,56 @@ namespace MaterialSkin.Controls
             set
             {
                 _title = value;
+                if (_title.Length == 0)
+                    _header_Height = MIN_HEADER_HEIGHT;
+                else
+                    _header_Height = 40;
+
                 Invalidate();
             }
         }
+
+        private NativeTextRenderer.TextAlignFlags nativeTextAligh = 
+            NativeTextRenderer.TextAlignFlags.Left | NativeTextRenderer.TextAlignFlags.Bottom;
+        private TitleAlign _TitleAlign = TitleAlign.LeftBottom;
+        [Category("MaterialDialog2")]
+        public TitleAlign TitleAlign
+        {
+            get
+            {
+                return _TitleAlign;
+            }
+            set
+            {
+                _TitleAlign = value;
+                switch(_TitleAlign)
+                {
+                    case TitleAlign.CenterBottom:
+                        nativeTextAligh = NativeTextRenderer.TextAlignFlags.Center | NativeTextRenderer.TextAlignFlags.Bottom;
+                        break;
+                    case TitleAlign.CenterMiddle:
+                        nativeTextAligh = NativeTextRenderer.TextAlignFlags.Center | NativeTextRenderer.TextAlignFlags.Middle;
+                        break;
+                    case TitleAlign.CenterTop:
+                        nativeTextAligh = NativeTextRenderer.TextAlignFlags.Center | NativeTextRenderer.TextAlignFlags.Top;
+                        break;
+                    case TitleAlign.LeftBottom:
+                        nativeTextAligh = NativeTextRenderer.TextAlignFlags.Left | NativeTextRenderer.TextAlignFlags.Bottom;
+                        break;
+                    case TitleAlign.LeftMiddle:
+                        nativeTextAligh = NativeTextRenderer.TextAlignFlags.Left | NativeTextRenderer.TextAlignFlags.Middle;
+                        break;
+                    case TitleAlign.LeftTop:
+                        nativeTextAligh = NativeTextRenderer.TextAlignFlags.Left | NativeTextRenderer.TextAlignFlags.Top;
+                        break;
+                    default:
+                        nativeTextAligh = NativeTextRenderer.TextAlignFlags.Left | NativeTextRenderer.TextAlignFlags.Bottom;
+                        break;
+                }
+                Invalidate();
+            }
+        }
+
 
 
         [Category("MaterialDialog2")]
@@ -197,7 +286,7 @@ namespace MaterialSkin.Controls
             //    RectHeight + 9);
 
             //MIN_HEADER_HEIGHT = _header_Height; //560;
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 6, 6));
+            //Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 6, 6));
 
 
             //_xButtonBounds = new Rectangle(Width - LEFT_RIGHT_PADDING, 0, LEFT_RIGHT_PADDING, _header_Height);
@@ -269,16 +358,14 @@ namespace MaterialSkin.Controls
         /// </summary>
         protected override void OnLoad(EventArgs e)
         {
-            if (_title.Length == 0)
-                _header_Height = MIN_HEADER_HEIGHT;
-            else
-                _header_Height = 40;
-
+            base.OnLoad(e);
+            
             if (DesignMode)
             {
                 _formOverlay.Visible = false;
                 return;
             }
+
             //
             if (this.Owner != null && _formOverlay.Owner == null)
             {
@@ -286,13 +373,13 @@ namespace MaterialSkin.Controls
                 _formOverlay.Owner = Owner;
                 _formOverlay.Location = new Point(Owner.Location.X, Owner.Location.Y);
             }
-            else if(this.Owner == null)
+            else if (this.Owner == null)
                 _formOverlay.Visible = false;
-
-            base.OnLoad(e);
 
             Location = new Point(Convert.ToInt32(Owner.Location.X + (Owner.Width / 2) - (Width / 2)), Convert.ToInt32(Owner.Location.Y + (Owner.Height / 2) - (Height / 2)));
             _AnimationManager.StartNewAnimation(AnimationDirection.In);
+
+
         }
 
         private void _validationButton_TextChanged(object sender, EventArgs e)
@@ -316,21 +403,6 @@ namespace MaterialSkin.Controls
         }
 
 
-        //private void _validationButton_LostFocus(object sender, EventArgs e)
-        //{
-        //    int _buttonWidth = ((TextRenderer.MeasureText(_validationButton.Text, SkinManager.getFontByType(MaterialSkinManager.fontType.Button))).Width + 32);
-        //    _validationButton.Width = _buttonWidth;
-        //    _validationButton.Height = BUTTON_HEIGHT;
-        //    Invalidate();
-        //}
-
-        //private void _cancelButton_LostFocus(object sender, EventArgs e)
-        //{
-        //    int _buttonWidth = ((TextRenderer.MeasureText(_cancelButton.Text, SkinManager.getFontByType(MaterialSkinManager.fontType.Button))).Width + 32);
-        //    _cancelButton.Width = _buttonWidth;
-        //    _cancelButton.Height = BUTTON_HEIGHT;
-        //    Invalidate();
-        //}
         /// <summary>
         /// Animates the Form slides
         /// </summary>
@@ -349,12 +421,7 @@ namespace MaterialSkin.Controls
         {
             base.OnPaint(e);
 
-            if(MIN_HEADER_HEIGHT > Height)
-            {
-                Height = MIN_HEADER_HEIGHT;
-            }
-
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 6, 6));
+            //Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 6, 6));
 
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -372,6 +439,7 @@ namespace MaterialSkin.Controls
             //Draw title
             using (NativeTextRenderer NativeText = new NativeTextRenderer(g))
             {
+
                 // Draw header text
                 NativeText.DrawTransparentText(
                     _title,
@@ -379,7 +447,7 @@ namespace MaterialSkin.Controls
                     SkinManager.TextHighEmphasisColor,
                     titleRect.Location,
                     titleRect.Size,
-                    NativeTextRenderer.TextAlignFlags.Left | NativeTextRenderer.TextAlignFlags.Bottom);
+                    nativeTextAligh);
             }
 
             //// Calc text Rect
@@ -410,13 +478,14 @@ namespace MaterialSkin.Controls
 
 
             // Determine whether or not we even should be drawing the buttons.
+            if(ControlBox)
+            {
+                if (_buttonState == ButtonState.XOver && ControlBox)
+                    g.FillRectangle(SkinManager.BackgroundHoverRedBrush, _xButtonBounds);
 
-            if (_buttonState == ButtonState.XOver && ControlBox)
-                g.FillRectangle(SkinManager.BackgroundHoverRedBrush, _xButtonBounds);
-
-            if (_buttonState == ButtonState.XDown && ControlBox)
-                g.FillRectangle(SkinManager.BackgroundDownRedBrush, _xButtonBounds);
-
+                if (_buttonState == ButtonState.XDown && ControlBox)
+                    g.FillRectangle(SkinManager.BackgroundDownRedBrush, _xButtonBounds);
+            }
             using (var formButtonsPen = new Pen(SkinManager.TextHighEmphasisColor, 2))
             {
                 // Close button
@@ -438,7 +507,21 @@ namespace MaterialSkin.Controls
                         _xButtonBounds.Y + (int)(_xButtonBounds.Height * 0.66));
                 }
             }
+            if (_ShowTitleDivideLine)
+            {
+                using (var formButtonsPen = new Pen(SkinManager.TextDisabledOrHintColor, 1))
+                {
+                    //title divide line
+                    g.DrawLine(
+                            formButtonsPen,
+                            0,
+                            _header_Height,
+                            Width,
+                            _header_Height
+                       );
+                }
 
+            }
 
         }
 
@@ -610,5 +693,17 @@ namespace MaterialSkin.Controls
             base.WndProc(ref message);
         }
 
+    }
+    public enum TitleAlign
+    {
+        LeftTop,
+        LeftMiddle,
+        LeftBottom,
+        //RightTop,
+        //RightCenter,
+        //RightBottom,
+        CenterTop,
+        CenterMiddle,
+        CenterBottom,
     }
 }
