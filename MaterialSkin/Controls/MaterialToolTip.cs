@@ -24,7 +24,7 @@ namespace MaterialSkin.Controls
 
         internal AnimationManager AnimationManager;
 
-        internal Point AnimationSource;
+        //internal Point AnimationSource;
 
 
         private SizeF toopTipSize;

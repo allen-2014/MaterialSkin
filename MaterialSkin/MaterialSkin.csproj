@@ -53,6 +53,9 @@
     <Compile Include="Controls\MaterialDialog2.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Controls\MaterialDivider2.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MaterialToolTip.cs">
       <SubType>Component</SubType>
     </Compile>

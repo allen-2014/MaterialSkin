@@ -59,6 +59,9 @@
       <Compile Update="Controls\MaterialDivider.cs">
         <SubType>Component</SubType>
       </Compile>
+      <Compile Update="Controls\MaterialDivider2.cs">
+        <SubType>Component</SubType>
+      </Compile>
       <Compile Update="Controls\MaterialButton.cs">
         <SubType>Component</SubType>
       </Compile>

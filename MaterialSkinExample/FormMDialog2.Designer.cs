@@ -36,6 +36,7 @@ namespace MaterialSkinExample
             this.materialLabel38 = new MaterialSkin.Controls.MaterialLabel();
             this.materialSwitch1 = new MaterialSkin.Controls.MaterialSwitch();
             this.materialCheckbox1 = new MaterialSkin.Controls.MaterialCheckbox();
+            this.materialDivider21 = new MaterialSkin.Controls.MaterialDivider2();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@ namespace MaterialSkinExample
             this.mBtnOK.DrawShadows = false;
             this.mBtnOK.HighEmphasis = true;
             this.mBtnOK.Icon = null;
-            this.mBtnOK.Location = new System.Drawing.Point(568, 269);
+            this.mBtnOK.Location = new System.Drawing.Point(566, 314);
             this.mBtnOK.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mBtnOK.MaterialToolTip = null;
             this.mBtnOK.MouseState = MaterialSkin.MouseState.HOVER;
@@ -75,7 +76,7 @@ namespace MaterialSkinExample
             this.mBtnCancel.DrawShadows = false;
             this.mBtnCancel.HighEmphasis = true;
             this.mBtnCancel.Icon = null;
-            this.mBtnCancel.Location = new System.Drawing.Point(430, 269);
+            this.mBtnCancel.Location = new System.Drawing.Point(428, 314);
             this.mBtnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mBtnCancel.MaterialToolTip = null;
             this.mBtnCancel.MouseState = MaterialSkin.MouseState.HOVER;
@@ -128,7 +129,7 @@ namespace MaterialSkinExample
             | System.Windows.Forms.AnchorStyles.Right)));
             this.materialLabel38.Depth = 0;
             this.materialLabel38.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel38.Location = new System.Drawing.Point(37, 77);
+            this.materialLabel38.Location = new System.Drawing.Point(38, 75);
             this.materialLabel38.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel38.Name = "materialLabel38";
             this.materialLabel38.Size = new System.Drawing.Size(267, 67);
@@ -166,12 +167,27 @@ namespace MaterialSkinExample
             this.materialCheckbox1.Text = "materialCheckbox1";
             this.materialCheckbox1.UseVisualStyleBackColor = true;
             // 
+            // materialDivider21
+            // 
+            this.materialDivider21.BackColor = System.Drawing.Color.White;
+            this.materialDivider21.Depth = 0;
+            this.materialDivider21.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialDivider21.Location = new System.Drawing.Point(64, 281);
+            this.materialDivider21.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider21.Name = "materialDivider21";
+            this.materialDivider21.Size = new System.Drawing.Size(547, 15);
+            this.materialDivider21.TabIndex = 5;
+            this.materialDivider21.Text = "materialDivider21";
+            this.materialDivider21.Title = "分割线2";
+            this.materialDivider21.TitlePosition = MaterialSkin.Controls.TitlePosition.Center;
+            // 
             // FormMDialog2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ButtonUseAccentColor = true;
-            this.ClientSize = new System.Drawing.Size(642, 314);
+            this.ClientSize = new System.Drawing.Size(675, 369);
+            this.Controls.Add(this.materialDivider21);
             this.Controls.Add(this.materialCheckbox1);
             this.Controls.Add(this.materialSwitch1);
             this.Controls.Add(this.materialCard1);
@@ -201,5 +217,6 @@ namespace MaterialSkinExample
         private MaterialSkin.Controls.MaterialCheckbox materialCheckbox1;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel38;
+        private MaterialSkin.Controls.MaterialDivider2 materialDivider21;
     }
 }

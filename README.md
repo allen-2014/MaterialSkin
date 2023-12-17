@@ -1,12 +1,15 @@
 # 更新说明
+2023.12.17
+- 增加有Title的 MaterialDivider2，可在左，中，右位置添加文本说明
+
+2023.12.16
+- 增加可设计的 MaterialDialog2，在设计时可添加控件，以显示更多的内容
+
 2023.12.04
 - 支持.net framework 4.0
 - 加了MaterialToolTip
 - 增加中英文字体的支持
 - 对MaterialButton加上自带tooltip属性
-
-2023.12.16
-- 增加可设计的 MaterialDialog2，在设计时可添加控件，以显示更多的内容
 
 # MaterialSkin 2 for .NET WinForms
 

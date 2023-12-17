@@ -379,7 +379,6 @@ namespace MaterialSkin.Controls
             Location = new Point(Convert.ToInt32(Owner.Location.X + (Owner.Width / 2) - (Width / 2)), Convert.ToInt32(Owner.Location.Y + (Owner.Height / 2) - (Height / 2)));
             _AnimationManager.StartNewAnimation(AnimationDirection.In);
 
-
         }
 
         private void _validationButton_TextChanged(object sender, EventArgs e)
@@ -509,7 +508,7 @@ namespace MaterialSkin.Controls
             }
             if (_ShowTitleDivideLine)
             {
-                using (var formButtonsPen = new Pen(SkinManager.TextDisabledOrHintColor, 1))
+                using (var formButtonsPen = new Pen(SkinManager.DividersColor, 1))
                 {
                     //title divide line
                     g.DrawLine(
