@@ -68,12 +68,12 @@
         private Rectangle rightDivider = default;
         public MaterialDivider2()
         {
-            margin = new Padding(10, 4, 10, 4);
+            margin = new Padding(8, 4, 8, 4);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             Height = 10;
-            BackColor = SkinManager.BackgroundColor;//SkinManager.DividersColor;
-            Font = SkinManager.getFontByType(MaterialSkinManager.fontType.Caption);
-
+            //BackColor = SkinManager.BackgroundColor;//SkinManager.DividersColor;
+            Font = SkinManager.getFontByType(MaterialSkinManager.fontType.Subtitle2);
+            ForeColor = SkinManager.TextHighEmphasisColor;
             //if true, the text is clear
             DoubleBuffered = true;
             //
@@ -198,7 +198,7 @@
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            e.Graphics.Clear(BackColor);
+            e.Graphics.Clear(Parent.BackColor);
 
             using (var dividerPen = new Pen(SkinManager.DividersColor, 1))
             {
@@ -219,14 +219,13 @@
                         rightDivider.Y);
             }
 
-            e.Graphics.FillRectangle(SkinManager.BackgroundBrush, titleRect);
             //Draw title
             using (NativeTextRenderer NativeText = new NativeTextRenderer(g))
             {
                 // Draw header text
                 NativeText.DrawTransparentText(
                     _title,
-                    SkinManager.getLogFontByType(MaterialSkinManager.fontType.Caption),
+                    SkinManager.getLogFontByType(MaterialSkinManager.fontType.Subtitle2),
                     SkinManager.TextHighEmphasisColor,
                     titleRect.Location,
                     titleRect.Size,

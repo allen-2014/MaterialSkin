@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel;
     using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Windows.Forms;
 
     public sealed class MaterialDivider : Control, IMaterialControl
@@ -22,6 +23,7 @@
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             Height = 1;
             BackColor = SkinManager.DividersColor;
+
         }
 
     }

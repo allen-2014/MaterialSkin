@@ -126,4 +126,7 @@
         <PackagePath></PackagePath>
       </None>
     </ItemGroup>
+    <ItemGroup>
+      <Reference Include="System.Windows.Forms" />
+    </ItemGroup>
   </Project>

@@ -37,6 +37,7 @@ namespace MaterialSkinExample
             this.materialSwitch1 = new MaterialSkin.Controls.MaterialSwitch();
             this.materialCheckbox1 = new MaterialSkin.Controls.MaterialCheckbox();
             this.materialDivider21 = new MaterialSkin.Controls.MaterialDivider2();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,14 +173,25 @@ namespace MaterialSkinExample
             this.materialDivider21.BackColor = System.Drawing.Color.White;
             this.materialDivider21.Depth = 0;
             this.materialDivider21.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialDivider21.Location = new System.Drawing.Point(64, 281);
+            this.materialDivider21.Location = new System.Drawing.Point(68, 254);
             this.materialDivider21.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider21.Name = "materialDivider21";
             this.materialDivider21.Size = new System.Drawing.Size(547, 15);
             this.materialDivider21.TabIndex = 5;
             this.materialDivider21.Text = "materialDivider21";
-            this.materialDivider21.Title = "分割线2";
+            this.materialDivider21.Title = "Instruction(important)";
             this.materialDivider21.TitlePosition = MaterialSkin.Controls.TitlePosition.Center;
+            // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.Location = new System.Drawing.Point(68, 276);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(533, 1);
+            this.materialDivider1.TabIndex = 6;
+            this.materialDivider1.Text = "materialDivider1";
             // 
             // FormMDialog2
             // 
@@ -187,6 +199,7 @@ namespace MaterialSkinExample
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ButtonUseAccentColor = true;
             this.ClientSize = new System.Drawing.Size(675, 369);
+            this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.materialDivider21);
             this.Controls.Add(this.materialCheckbox1);
             this.Controls.Add(this.materialSwitch1);
@@ -218,5 +231,6 @@ namespace MaterialSkinExample
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel38;
         private MaterialSkin.Controls.MaterialDivider2 materialDivider21;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
     }
 }
