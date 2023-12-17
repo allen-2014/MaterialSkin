@@ -69,7 +69,7 @@
         public MaterialDivider2()
         {
             margin = new Padding(8, 4, 8, 4);
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            //SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             Height = 10;
             //BackColor = SkinManager.BackgroundColor;//SkinManager.DividersColor;
             Font = SkinManager.getFontByType(MaterialSkinManager.fontType.Subtitle2);
