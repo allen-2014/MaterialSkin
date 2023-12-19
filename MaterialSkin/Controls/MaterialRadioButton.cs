@@ -24,7 +24,7 @@
 
         private bool ripple;
 
-        [Category("Behavior")]
+        [Category("Material")]
         public bool Ripple
         {
             get { return ripple; }
@@ -35,7 +35,60 @@
 
                 if (value)
                 {
+                    if (Height < HEIGHT_RIPPLE)
+                        Height = HEIGHT_RIPPLE;
+                    if (AutoSize)
+                    {
+                        Height = HEIGHT_RIPPLE;
+                    }
+                        
+                }
+                else
+                {
                     Margin = new Padding(0);
+                    if (AutoSize)
+                    {
+                        Height = _radioButtonBounds.Height;
+                    }
+                        
+                }
+
+                Invalidate();
+            }
+        }
+
+        private MaterialDensity density = MaterialDensity.Default;
+        [Category("Material")]
+        public MaterialDensity Density
+        {
+            get
+            {
+                return this.density;
+            }
+            set
+            {
+                this.density = value;
+                if(this.density == MaterialDensity.Dense)
+                {
+                    _boxOffset = Height / 2 - (int)(RADIOBUTTON_DENSITY_SIZE / 2) - 1;
+                    _radioButtonBounds = new Rectangle(_boxOffset, _boxOffset, RADIOBUTTON_DENSITY_SIZE, RADIOBUTTON_DENSITY_SIZE);
+                    _radioSizeHalf = RADIOBUTTON_DENSITY_SIZE_HALF;
+                    //_radioButtonCenter = _boxOffset + RADIOBUTTON_DENSITY_SIZE_HALF;
+                    _radioButtonSize = RADIOBUTTON_DENSITY_SIZE;
+                    _textOffset = DENSITY_TEXT_OFFSET;
+                }
+                else
+                {
+                    _boxOffset = Height / 2 - (int)(RADIOBUTTON_SIZE / 2) - 1;
+                    _radioButtonBounds = new Rectangle(_boxOffset, _boxOffset, RADIOBUTTON_SIZE, RADIOBUTTON_SIZE);
+                    _radioSizeHalf = RADIOBUTTON_SIZE_HALF;
+                    //_radioButtonCenter = _boxOffset + RADIOBUTTON_SIZE_HALF;
+                    _radioButtonSize = RADIOBUTTON_SIZE;
+                    _textOffset = TEXT_OFFSET;
+                }
+                if(AutoSize)
+                {
+                    GetPreferredSize(Size.Empty);
                 }
 
                 Invalidate();
@@ -51,6 +104,11 @@
         // size related variables which should be recalculated onsizechanged
         private Rectangle _radioButtonBounds;
 
+        private int _radioButtonCenter;
+        private int _radioButtonSize;
+        private int _radioSizeHalf;
+        private int _textOffset;
+
         private int _boxOffset;
 
         // size constants
@@ -58,11 +116,16 @@
 
         private const int HEIGHT_NO_RIPPLE = 20;
         private const int RADIOBUTTON_SIZE = 18;
+        private const int RADIOBUTTON_DENSITY_SIZE = 14;
         private const int RADIOBUTTON_SIZE_HALF = RADIOBUTTON_SIZE / 2;
+        private const int RADIOBUTTON_DENSITY_SIZE_HALF = RADIOBUTTON_DENSITY_SIZE / 2;
         private const int RADIOBUTTON_OUTER_CIRCLE_WIDTH = 2;
         private const int RADIOBUTTON_INNER_CIRCLE_SIZE = RADIOBUTTON_SIZE - (2 * RADIOBUTTON_OUTER_CIRCLE_WIDTH);
         private const int TEXT_OFFSET = 26;
+        private const int DENSITY_TEXT_OFFSET = 22;
 
+
+        
         public MaterialRadioButton()
         {
             SetStyle(ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer, true);
@@ -99,25 +162,45 @@
             SizeChanged += OnSizeChanged;
 
             Ripple = true;
+            Density = MaterialDensity.Default;
             MouseLocation = new Point(-1, -1);
         }
 
         private void OnSizeChanged(object sender, EventArgs eventArgs)
         {
-            _boxOffset = Height / 2 - (int)(RADIOBUTTON_SIZE / 2);
-            _radioButtonBounds = new Rectangle(_boxOffset, _boxOffset, RADIOBUTTON_SIZE, RADIOBUTTON_SIZE);
+            //minus 1 for radio button and text can have the same horizon
+            _boxOffset = Height / 2 - (int)(_radioButtonSize / 2) - 1;
+            _radioSizeHalf = _radioButtonSize / 2;
+            //if(density == MaterialDensity.Default)
+            //{
+            //    _radioButtonBounds = new Rectangle(_boxOffset, _boxOffset, RADIOBUTTON_SIZE, RADIOBUTTON_SIZE);
+            //}
+            //else if(density == MaterialDensity.Dense)
+            //{
+            //    _radioButtonBounds = new Rectangle(_boxOffset, _boxOffset, RADIOBUTTON_DENSITY_SIZE, RADIOBUTTON_DENSITY_SIZE);
+            //}
+            _radioButtonBounds = new Rectangle(_boxOffset, _boxOffset, _radioButtonSize, _radioButtonSize);
         }
 
         public override Size GetPreferredSize(Size proposedSize)
         {
-            Size strSize;
+            Size strSize = default;
 
             using (NativeTextRenderer NativeText = new NativeTextRenderer(CreateGraphics()))
             {
-                strSize = NativeText.MeasureLogString(Text, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1));
+
+                if (density == MaterialDensity.Default)
+                {
+                    strSize = NativeText.MeasureLogString(Text, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1));
+                }
+                else if (density == MaterialDensity.Dense)
+                {
+                    strSize = NativeText.MeasureLogString(Text, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body2));
+                }
             }
 
-            int w = _boxOffset + TEXT_OFFSET + strSize.Width;
+            int w = _boxOffset + _textOffset + strSize.Width;
+            Width = w;
             return Ripple ? new Size(w, HEIGHT_RIPPLE) : new Size(w, HEIGHT_NO_RIPPLE);
         }
 
@@ -130,12 +213,12 @@
             // clear the control
             g.Clear(Parent.BackColor);
 
-            int RADIOBUTTON_CENTER = _boxOffset + RADIOBUTTON_SIZE_HALF;
+            int RADIOBUTTON_CENTER = _boxOffset + _radioSizeHalf;//_boxOffset + (density == MaterialDensity.Default ? RADIOBUTTON_SIZE_HALF:(density == MaterialDensity.Dense? RADIOBUTTON_DENSITY_SIZE_HALF: RADIOBUTTON_SIZE_HALF));
             Point animationSource = new Point(RADIOBUTTON_CENTER, RADIOBUTTON_CENTER);
 
             double animationProgress = _checkAM.GetProgress();
 
-            int colorAlpha = Enabled ? (int)(animationProgress * 255.0) : SkinManager.CheckBoxOffDisabledColor.A;
+            int colorAlpha = Enabled ? (Checked && !Ripple ? 255: (int)(animationProgress * 255.0)) : SkinManager.CheckBoxOffDisabledColor.A;
             int backgroundAlpha = Enabled ? (int)(SkinManager.CheckboxOffColor.A * (1.0 - animationProgress)) : SkinManager.CheckBoxOffDisabledColor.A;
             float animationSize = (float)(animationProgress * 9f);
             float animationSizeHalf = animationSize / 2;
@@ -174,30 +257,41 @@
             // draw radiobutton circle
             using (Pen pen = new Pen(DrawHelper.BlendColor(Parent.BackColor, Enabled ? SkinManager.CheckboxOffColor : SkinManager.CheckBoxOffDisabledColor, backgroundAlpha), 2))
             {
-                g.DrawEllipse(pen, new Rectangle(_boxOffset, _boxOffset, RADIOBUTTON_SIZE, RADIOBUTTON_SIZE));
+                //int radio_size = (density == MaterialDensity.Default ? RADIOBUTTON_SIZE : (density == MaterialDensity.Dense? RADIOBUTTON_DENSITY_SIZE: RADIOBUTTON_SIZE));
+                g.DrawEllipse(pen, new Rectangle(_boxOffset, _boxOffset, _radioButtonSize, _radioButtonSize));
             }
 
             if (Enabled)
             {
                 using (Pen pen = new Pen(RadioColor, 2))
                 {
-                    g.DrawEllipse(pen, new Rectangle(_boxOffset, _boxOffset, RADIOBUTTON_SIZE, RADIOBUTTON_SIZE));
+                    g.DrawEllipse(pen, new Rectangle(_boxOffset, _boxOffset, _radioButtonSize, _radioButtonSize));
                 }
             }
 
             if (Checked)
             {
+                float ellipseWidth = animationSize;
+                float ellipseWidthHalf = animationSizeHalf;
+                if (!Ripple)
+                {
+                    ellipseWidth = _radioButtonSize - 6;
+                    ellipseWidthHalf = _radioSizeHalf - 3;
+
+                }
+
                 using (SolidBrush brush = new SolidBrush(RadioColor))
                 {
-                    g.FillEllipse(brush, new RectangleF(RADIOBUTTON_CENTER - animationSizeHalf, RADIOBUTTON_CENTER - animationSizeHalf, animationSize, animationSize));
+                    //g.FillEllipse(brush, new RectangleF(RADIOBUTTON_CENTER - animationSizeHalf, RADIOBUTTON_CENTER - animationSizeHalf, animationSize, animationSize));
+                    g.FillEllipse(brush, new RectangleF(RADIOBUTTON_CENTER - ellipseWidthHalf, RADIOBUTTON_CENTER - ellipseWidthHalf, ellipseWidth, ellipseWidth));
                 }
             }
 
             // Text
             using (NativeTextRenderer NativeText = new NativeTextRenderer(g))
             {
-                Rectangle textLocation = new Rectangle(_boxOffset + TEXT_OFFSET, 0, Width, Height);
-                NativeText.DrawTransparentText(Text, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1),
+                Rectangle textLocation = new Rectangle(_boxOffset + _textOffset, 0, Width, Height);
+                NativeText.DrawTransparentText(Text, SkinManager.getLogFontByType(density == MaterialDensity.Default?MaterialSkinManager.fontType.Body1:(density == MaterialDensity.Dense? MaterialSkinManager.fontType.Body2: MaterialSkinManager.fontType.Body1)),
                     Enabled ? SkinManager.TextHighEmphasisColor : SkinManager.TextDisabledOrHintColor,
                     textLocation.Location,
                     textLocation.Size,
@@ -266,7 +360,9 @@
                 {
                     _rippleAM.SecondaryIncrement = 0;
                     _rippleAM.StartNewAnimation(AnimationDirection.InOutIn, new object[] { Checked });
+            
                 }
+           
             };
 
             KeyDown += (sender, args) =>
@@ -304,5 +400,10 @@
                 Cursor = IsMouseInCheckArea() ? Cursors.Hand : Cursors.Default;
             };
         }
+    }
+    public enum MaterialDensity
+    {
+        Default,
+        Dense
     }
 }

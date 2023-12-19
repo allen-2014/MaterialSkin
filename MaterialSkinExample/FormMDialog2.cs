@@ -21,5 +21,11 @@ namespace MaterialSkinExample
         {
             InitializeComponent();
         }
+
+        private void materialRadioButton1_Click(object sender, EventArgs e)
+        {
+            //MaterialSnackBar snakBar = new MaterialSnackBar(materialRadioButton1.Checked.ToString());
+            //snakBar.ShowDialog(this);
+        }
     }
 }

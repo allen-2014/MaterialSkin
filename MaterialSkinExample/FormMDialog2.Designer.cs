@@ -38,6 +38,8 @@ namespace MaterialSkinExample
             this.materialCheckbox1 = new MaterialSkin.Controls.MaterialCheckbox();
             this.materialDivider21 = new MaterialSkin.Controls.MaterialDivider2();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialRadioButton1 = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialRadioButton2 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -139,31 +141,29 @@ namespace MaterialSkinExample
             // 
             // materialSwitch1
             // 
-            this.materialSwitch1.AutoSize = true;
             this.materialSwitch1.Depth = 0;
-            this.materialSwitch1.Location = new System.Drawing.Point(54, 104);
+            this.materialSwitch1.Location = new System.Drawing.Point(54, 118);
             this.materialSwitch1.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitch1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitch1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSwitch1.Name = "materialSwitch1";
             this.materialSwitch1.Ripple = true;
-            this.materialSwitch1.Size = new System.Drawing.Size(173, 37);
+            this.materialSwitch1.Size = new System.Drawing.Size(206, 35);
             this.materialSwitch1.TabIndex = 3;
             this.materialSwitch1.Text = "materialSwitch1";
             this.materialSwitch1.UseVisualStyleBackColor = true;
             // 
             // materialCheckbox1
             // 
-            this.materialCheckbox1.AutoSize = true;
             this.materialCheckbox1.Depth = 0;
-            this.materialCheckbox1.Location = new System.Drawing.Point(54, 189);
+            this.materialCheckbox1.Location = new System.Drawing.Point(54, 65);
             this.materialCheckbox1.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckbox1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckbox1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckbox1.Name = "materialCheckbox1";
             this.materialCheckbox1.ReadOnly = false;
             this.materialCheckbox1.Ripple = true;
-            this.materialCheckbox1.Size = new System.Drawing.Size(171, 37);
+            this.materialCheckbox1.Size = new System.Drawing.Size(173, 40);
             this.materialCheckbox1.TabIndex = 4;
             this.materialCheckbox1.Text = "materialCheckbox1";
             this.materialCheckbox1.UseVisualStyleBackColor = true;
@@ -173,6 +173,7 @@ namespace MaterialSkinExample
             this.materialDivider21.BackColor = System.Drawing.Color.White;
             this.materialDivider21.Depth = 0;
             this.materialDivider21.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialDivider21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialDivider21.Location = new System.Drawing.Point(68, 254);
             this.materialDivider21.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider21.Name = "materialDivider21";
@@ -193,12 +194,50 @@ namespace MaterialSkinExample
             this.materialDivider1.TabIndex = 6;
             this.materialDivider1.Text = "materialDivider1";
             // 
+            // materialRadioButton1
+            // 
+            this.materialRadioButton1.AutoSize = true;
+            this.materialRadioButton1.Density = MaterialSkin.Controls.MaterialDensity.Dense;
+            this.materialRadioButton1.Depth = 0;
+            this.materialRadioButton1.Location = new System.Drawing.Point(19, 167);
+            this.materialRadioButton1.Margin = new System.Windows.Forms.Padding(0);
+            this.materialRadioButton1.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRadioButton1.Name = "materialRadioButton1";
+            this.materialRadioButton1.Ripple = false;
+            this.materialRadioButton1.Size = new System.Drawing.Size(69, 20);
+            this.materialRadioButton1.TabIndex = 7;
+            this.materialRadioButton1.TabStop = true;
+            this.materialRadioButton1.Text = "01 USD";
+            this.materialRadioButton1.UseVisualStyleBackColor = true;
+            this.materialRadioButton1.Click += new System.EventHandler(this.materialRadioButton1_Click);
+            // 
+            // materialRadioButton2
+            // 
+            this.materialRadioButton2.AutoSize = true;
+            this.materialRadioButton2.Density = MaterialSkin.Controls.MaterialDensity.Dense;
+            this.materialRadioButton2.Depth = 0;
+            this.materialRadioButton2.Location = new System.Drawing.Point(19, 200);
+            this.materialRadioButton2.Margin = new System.Windows.Forms.Padding(0);
+            this.materialRadioButton2.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRadioButton2.Name = "materialRadioButton2";
+            this.materialRadioButton2.Ripple = false;
+            this.materialRadioButton2.Size = new System.Drawing.Size(69, 20);
+            this.materialRadioButton2.TabIndex = 7;
+            this.materialRadioButton2.TabStop = true;
+            this.materialRadioButton2.Text = "02 USD";
+            this.materialRadioButton2.UseVisualStyleBackColor = true;
+            this.materialRadioButton2.Click += new System.EventHandler(this.materialRadioButton1_Click);
+            // 
             // FormMDialog2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ButtonUseAccentColor = true;
             this.ClientSize = new System.Drawing.Size(675, 369);
+            this.Controls.Add(this.materialRadioButton2);
+            this.Controls.Add(this.materialRadioButton1);
             this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.materialDivider21);
             this.Controls.Add(this.materialCheckbox1);
@@ -232,5 +271,7 @@ namespace MaterialSkinExample
         private MaterialSkin.Controls.MaterialLabel materialLabel38;
         private MaterialSkin.Controls.MaterialDivider2 materialDivider21;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton1;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
     }
 }
