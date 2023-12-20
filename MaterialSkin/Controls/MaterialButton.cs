@@ -129,7 +129,7 @@
         }
 
         private string toolTipCaption = string.Empty;
-        [Category("Material Skin")]
+        [Category("Material Skin"), DefaultValue(""), Localizable(true)]
         [Description("Default tooltip caption")]
         public string ToolTipCaption
         {

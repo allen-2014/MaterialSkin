@@ -159,7 +159,45 @@ namespace MaterialSkin.Controls
                 Invalidate();
             }
         }
+        private int _heightPaddingExtra1 = 2;
+        private int _heightPaddingExtra2 = 1;
 
+        private TxtFontType _fontType = TxtFontType.Subtitle2;
+
+        [Category("Material Skin"), DefaultValue(TxtFontType.Subtitle2)]
+        public TxtFontType FontType
+        {
+            get
+            {
+                return _fontType;
+            }
+            set
+            {
+                _fontType = value;
+                if(_fontType == TxtFontType.Subtitle2)
+                {
+                    Font = SkinManager.getFontByType((MaterialSkinManager.fontType.Body1));
+                    _heightPaddingExtra1 = 2;
+                    _heightPaddingExtra2 = 1;
+
+                }
+                else
+                {
+                    Font = SkinManager.getFontByType(((MaterialSkinManager.fontType)_fontType));
+                    _heightPaddingExtra1 = 0;
+                    _heightPaddingExtra2 = 0;
+                }
+                UpdateRects();
+                Invalidate();
+            }
+        }
+
+        // Font Handling
+        public enum TxtFontType
+        {
+            Subtitle1 = MaterialSkinManager.fontType.Subtitle1,
+            Subtitle2 = MaterialSkinManager.fontType.Subtitle2
+        }
         public enum PrefixSuffixTypes
         {
             None,
@@ -176,10 +214,10 @@ namespace MaterialSkin.Controls
             {
                 _prefixsuffix = value;
                 UpdateRects();            //Génére une nullref exception
-                if (_prefixsuffix == PrefixSuffixTypes.Suffix)
-                    RightToLeft = RightToLeft.Yes;
-                else
-                    RightToLeft = RightToLeft.No;
+                //if (_prefixsuffix == PrefixSuffixTypes.Suffix)
+                //    RightToLeft = RightToLeft.Yes;
+                //else
+                //    RightToLeft = RightToLeft.No;
                 Invalidate();
             }
         }
@@ -1267,6 +1305,7 @@ namespace MaterialSkin.Controls
         private const int ACTIVATION_INDICATOR_HEIGHT = 2;
         private const int HELPER_TEXT_HEIGHT = 16;
         private const int FONT_HEIGHT = 20;
+
         
         private int HEIGHT = 48;
 
@@ -1313,12 +1352,12 @@ namespace MaterialSkin.Controls
                 preProcessIcons();
             };
 
-            Font = SkinManager.getFontByType(MaterialSkinManager.fontType.Subtitle1);
+            Font = SkinManager.getFontByType((MaterialSkinManager.fontType.Body1));
 
             baseTextBox = new BaseTextBox
             {
                 BorderStyle = BorderStyle.None,
-                Font = base.Font,
+                //Font = base.Font,
                 ForeColor = SkinManager.TextHighEmphasisColor,
                 Multiline = false,
                 Location = new Point(LEFT_PADDING, HEIGHT/2- FONT_HEIGHT/2),
@@ -1463,7 +1502,7 @@ namespace MaterialSkin.Controls
                     // Draw Prefix text 
                     NativeText.DrawTransparentText(
                     _prefixsuffixText,
-                    SkinManager.getLogFontByType(MaterialSkinManager.fontType.Subtitle1),
+                    SkinManager.getLogFontByType((MaterialSkinManager.fontType)_fontType),
                     Enabled ? SkinManager.TextMediumEmphasisColor : SkinManager.TextDisabledOrHintColor,
                     prefixRect.Location,
                     prefixRect.Size,
@@ -1486,7 +1525,7 @@ namespace MaterialSkin.Controls
                     // Draw Suffix text 
                     NativeText.DrawTransparentText(
                     _prefixsuffixText,
-                    SkinManager.getLogFontByType(MaterialSkinManager.fontType.Subtitle1),
+                    SkinManager.getLogFontByType((MaterialSkinManager.fontType)_fontType),
                     Enabled ? SkinManager.TextMediumEmphasisColor : SkinManager.TextDisabledOrHintColor,
                     suffixRect.Location,
                     suffixRect.Size,
@@ -1864,7 +1903,7 @@ namespace MaterialSkin.Controls
             {
                 using (NativeTextRenderer NativeText = new NativeTextRenderer(CreateGraphics()))
                 {
-                    _prefix_padding = NativeText.MeasureLogString(_prefixsuffixText, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Subtitle1)).Width + PREFIX_SUFFIX_PADDING;
+                    _prefix_padding = NativeText.MeasureLogString(_prefixsuffixText, SkinManager.getLogFontByType((MaterialSkinManager.fontType)_fontType)).Width + PREFIX_SUFFIX_PADDING;
                     _left_padding += _prefix_padding;
                 }
             }
@@ -1875,7 +1914,7 @@ namespace MaterialSkin.Controls
             {
                 using (NativeTextRenderer NativeText = new NativeTextRenderer(CreateGraphics()))
                 {
-                    _suffix_padding = NativeText.MeasureLogString(_prefixsuffixText, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Subtitle1)).Width + PREFIX_SUFFIX_PADDING;
+                    _suffix_padding = NativeText.MeasureLogString(_prefixsuffixText, SkinManager.getLogFontByType((MaterialSkinManager.fontType)_fontType)).Width + PREFIX_SUFFIX_PADDING;
                     _right_padding += _suffix_padding;
                 }
             }
@@ -1884,13 +1923,13 @@ namespace MaterialSkin.Controls
 
             if (hasHint && UseTallSize && (isFocused || !String.IsNullOrEmpty(Text)))
             {
-                baseTextBox.Location = new Point(_left_padding, 22);
+                baseTextBox.Location = new Point(_left_padding, 22 + _heightPaddingExtra1);
                 baseTextBox.Width = Width - (_left_padding + _right_padding);
                 baseTextBox.Height = FONT_HEIGHT;
             }
             else
             {
-                baseTextBox.Location = new Point(_left_padding, (LINE_Y + ACTIVATION_INDICATOR_HEIGHT) / 2 - FONT_HEIGHT / 2);
+                baseTextBox.Location = new Point(_left_padding, (LINE_Y + ACTIVATION_INDICATOR_HEIGHT) / 2 - FONT_HEIGHT / 2 + _heightPaddingExtra2);
                 baseTextBox.Width = Width - (_left_padding + _right_padding);
                 baseTextBox.Height = FONT_HEIGHT;
             }
@@ -1964,4 +2003,5 @@ namespace MaterialSkin.Controls
             }
         }
     }
+    
 }

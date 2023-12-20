@@ -40,6 +40,8 @@ namespace MaterialSkinExample
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.materialRadioButton1 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialRadioButton2 = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
+            this.materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +64,6 @@ namespace MaterialSkinExample
             this.mBtnOK.Size = new System.Drawing.Size(59, 36);
             this.mBtnOK.TabIndex = 0;
             this.mBtnOK.Text = "OK";
-            this.mBtnOK.ToolTipCaption = "";
             this.mBtnOK.ToolTipDuration = 0;
             this.mBtnOK.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.BottomCenter;
             this.mBtnOK.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
@@ -88,7 +89,6 @@ namespace MaterialSkinExample
             this.mBtnCancel.Size = new System.Drawing.Size(118, 36);
             this.mBtnCancel.TabIndex = 1;
             this.mBtnCancel.Text = "mBtnCancel";
-            this.mBtnCancel.ToolTipCaption = "";
             this.mBtnCancel.ToolTipDuration = 0;
             this.mBtnCancel.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.BottomCenter;
             this.mBtnCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
@@ -197,7 +197,6 @@ namespace MaterialSkinExample
             // materialRadioButton1
             // 
             this.materialRadioButton1.AutoSize = true;
-            this.materialRadioButton1.Density = MaterialSkin.Controls.MaterialDensity.Dense;
             this.materialRadioButton1.Depth = 0;
             this.materialRadioButton1.Location = new System.Drawing.Point(19, 167);
             this.materialRadioButton1.Margin = new System.Windows.Forms.Padding(0);
@@ -206,6 +205,7 @@ namespace MaterialSkinExample
             this.materialRadioButton1.Name = "materialRadioButton1";
             this.materialRadioButton1.Ripple = false;
             this.materialRadioButton1.Size = new System.Drawing.Size(69, 20);
+            this.materialRadioButton1.SizeType = MaterialSkin.Controls.MaterialSizeType.Small;
             this.materialRadioButton1.TabIndex = 7;
             this.materialRadioButton1.TabStop = true;
             this.materialRadioButton1.Text = "01 USD";
@@ -215,7 +215,6 @@ namespace MaterialSkinExample
             // materialRadioButton2
             // 
             this.materialRadioButton2.AutoSize = true;
-            this.materialRadioButton2.Density = MaterialSkin.Controls.MaterialDensity.Dense;
             this.materialRadioButton2.Depth = 0;
             this.materialRadioButton2.Location = new System.Drawing.Point(19, 200);
             this.materialRadioButton2.Margin = new System.Windows.Forms.Padding(0);
@@ -224,11 +223,74 @@ namespace MaterialSkinExample
             this.materialRadioButton2.Name = "materialRadioButton2";
             this.materialRadioButton2.Ripple = false;
             this.materialRadioButton2.Size = new System.Drawing.Size(69, 20);
+            this.materialRadioButton2.SizeType = MaterialSkin.Controls.MaterialSizeType.Small;
             this.materialRadioButton2.TabIndex = 7;
             this.materialRadioButton2.TabStop = true;
             this.materialRadioButton2.Text = "02 USD";
             this.materialRadioButton2.UseVisualStyleBackColor = true;
             this.materialRadioButton2.Click += new System.EventHandler(this.materialRadioButton1_Click);
+            // 
+            // materialComboBox1
+            // 
+            this.materialComboBox1.AutoResize = false;
+            this.materialComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialComboBox1.Depth = 0;
+            this.materialComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.materialComboBox1.DropDownHeight = 118;
+            this.materialComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.materialComboBox1.DropDownWidth = 121;
+            this.materialComboBox1.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialComboBox1.FormattingEnabled = true;
+            this.materialComboBox1.Hint = "HINT";
+            this.materialComboBox1.IntegralHeight = false;
+            this.materialComboBox1.ItemHeight = 29;
+            this.materialComboBox1.Items.AddRange(new object[] {
+            "Alipay",
+            "WechatPay"});
+            this.materialComboBox1.Location = new System.Drawing.Point(54, 283);
+            this.materialComboBox1.MaxDropDownItems = 4;
+            this.materialComboBox1.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialComboBox1.Name = "materialComboBox1";
+            this.materialComboBox1.Size = new System.Drawing.Size(110, 35);
+            this.materialComboBox1.StartIndex = 0;
+            this.materialComboBox1.TabIndex = 8;
+            this.materialComboBox1.UseTallSize = false;
+            // 
+            // materialTextBox21
+            // 
+            this.materialTextBox21.AnimateReadOnly = false;
+            this.materialTextBox21.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.materialTextBox21.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.materialTextBox21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialTextBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.materialTextBox21.Depth = 0;
+            this.materialTextBox21.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBox21.HideSelection = true;
+            this.materialTextBox21.Hint = "sdf";
+            this.materialTextBox21.LeadingIcon = null;
+            this.materialTextBox21.Location = new System.Drawing.Point(188, 283);
+            this.materialTextBox21.MaxLength = 32767;
+            this.materialTextBox21.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBox21.Name = "materialTextBox21";
+            this.materialTextBox21.PasswordChar = '\0';
+            this.materialTextBox21.PrefixSuffix = MaterialSkin.Controls.MaterialTextBox2.PrefixSuffixTypes.Suffix;
+            this.materialTextBox21.PrefixSuffixText = "CNY";
+            this.materialTextBox21.ReadOnly = false;
+            this.materialTextBox21.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialTextBox21.SelectedText = "";
+            this.materialTextBox21.SelectionLength = 0;
+            this.materialTextBox21.SelectionStart = 0;
+            this.materialTextBox21.ShortcutsEnabled = true;
+            this.materialTextBox21.ShowAssistiveText = true;
+            this.materialTextBox21.Size = new System.Drawing.Size(169, 52);
+            this.materialTextBox21.TabIndex = 9;
+            this.materialTextBox21.TabStop = false;
+            this.materialTextBox21.Text = "046464645USD";
+            this.materialTextBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.materialTextBox21.TrailingIcon = null;
+            this.materialTextBox21.UseSystemPasswordChar = false;
+            this.materialTextBox21.UseTallSize = false;
             // 
             // FormMDialog2
             // 
@@ -236,6 +298,8 @@ namespace MaterialSkinExample
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ButtonUseAccentColor = true;
             this.ClientSize = new System.Drawing.Size(675, 369);
+            this.Controls.Add(this.materialTextBox21);
+            this.Controls.Add(this.materialComboBox1);
             this.Controls.Add(this.materialRadioButton2);
             this.Controls.Add(this.materialRadioButton1);
             this.Controls.Add(this.materialDivider1);
@@ -273,5 +337,7 @@ namespace MaterialSkinExample
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton1;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
+        private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
     }
 }

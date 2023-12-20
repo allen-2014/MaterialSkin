@@ -57,18 +57,18 @@
             }
         }
 
-        private MaterialDensity density = MaterialDensity.Default;
+        private MaterialSizeType sizeType = MaterialSizeType.Default;
         [Category("Material")]
-        public MaterialDensity Density
+        public MaterialSizeType SizeType
         {
             get
             {
-                return this.density;
+                return this.sizeType;
             }
             set
             {
-                this.density = value;
-                if(this.density == MaterialDensity.Dense)
+                this.sizeType = value;
+                if(this.sizeType == MaterialSizeType.Small)
                 {
                     _boxOffset = Height / 2 - (int)(RADIOBUTTON_DENSITY_SIZE / 2) - 1;
                     _radioButtonBounds = new Rectangle(_boxOffset, _boxOffset, RADIOBUTTON_DENSITY_SIZE, RADIOBUTTON_DENSITY_SIZE);
@@ -162,7 +162,7 @@
             SizeChanged += OnSizeChanged;
 
             Ripple = true;
-            Density = MaterialDensity.Default;
+            SizeType = MaterialSizeType.Default;
             MouseLocation = new Point(-1, -1);
         }
 
@@ -189,11 +189,11 @@
             using (NativeTextRenderer NativeText = new NativeTextRenderer(CreateGraphics()))
             {
 
-                if (density == MaterialDensity.Default)
+                if (sizeType == MaterialSizeType.Default)
                 {
                     strSize = NativeText.MeasureLogString(Text, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1));
                 }
-                else if (density == MaterialDensity.Dense)
+                else if (sizeType == MaterialSizeType.Small)
                 {
                     strSize = NativeText.MeasureLogString(Text, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body2));
                 }
@@ -291,7 +291,7 @@
             using (NativeTextRenderer NativeText = new NativeTextRenderer(g))
             {
                 Rectangle textLocation = new Rectangle(_boxOffset + _textOffset, 0, Width, Height);
-                NativeText.DrawTransparentText(Text, SkinManager.getLogFontByType(density == MaterialDensity.Default?MaterialSkinManager.fontType.Body1:(density == MaterialDensity.Dense? MaterialSkinManager.fontType.Body2: MaterialSkinManager.fontType.Body1)),
+                NativeText.DrawTransparentText(Text, SkinManager.getLogFontByType(sizeType == MaterialSizeType.Default?MaterialSkinManager.fontType.Body1:(sizeType == MaterialSizeType.Small? MaterialSkinManager.fontType.Body2: MaterialSkinManager.fontType.Body1)),
                     Enabled ? SkinManager.TextHighEmphasisColor : SkinManager.TextDisabledOrHintColor,
                     textLocation.Location,
                     textLocation.Size,
@@ -401,9 +401,9 @@
             };
         }
     }
-    public enum MaterialDensity
+    public enum MaterialSizeType
     {
         Default,
-        Dense
+        Small
     }
 }

@@ -8,6 +8,7 @@
     using System.Data;
     using System.Windows.Forms;
 
+
     public class MaterialComboBox : ComboBox, IMaterialControl
     {
         // For some reason, even when overriding the AutoSize property, it doesn't appear on the properties panel, so we have to create a new one.
@@ -65,6 +66,22 @@
             }
         }
 
+        private ComboFontType _fontType = ComboFontType.Subtitle2;
+        
+        [Category("Material Skin"), DefaultValue(ComboFontType.Subtitle2)]
+        public ComboFontType FontType
+        {
+            get
+            {
+                return _fontType;
+            }
+            set
+            {
+                _fontType = value;
+                Invalidate();
+            }
+        }
+
         private int _startIndex;
         public int StartIndex
         {
@@ -106,7 +123,7 @@
             UseTallSize = true;
             MaxDropDownItems = 4;
 
-            Font = SkinManager.getFontByType(MaterialSkinManager.fontType.Subtitle2);
+            Font = SkinManager.getFontByType((MaterialSkinManager.fontType)_fontType);
             BackColor = SkinManager.BackgroundColor;
             ForeColor = SkinManager.TextHighEmphasisColor;
             DrawMode = DrawMode.OwnerDrawVariable;
@@ -261,7 +278,7 @@
                 // Draw user text
                 NativeText.DrawTransparentText(
                     Text,
-                    SkinManager.getLogFontByType(MaterialSkinManager.fontType.Subtitle1),
+                    SkinManager.getLogFontByType((MaterialSkinManager.fontType)_fontType),
                     Enabled ? SkinManager.TextHighEmphasisColor : SkinManager.TextDisabledOrHintColor,
                     textRect.Location,
                     textRect.Size,
@@ -334,7 +351,7 @@
             {
                 NativeText.DrawTransparentText(
                 Text,
-                SkinManager.getFontByType(MaterialSkinManager.fontType.Subtitle1),
+                SkinManager.getLogFontByType((MaterialSkinManager.fontType)_fontType),
                 SkinManager.TextHighEmphasisNoAlphaColor,
                 new Point(e.Bounds.Location.X + SkinManager.FORM_PADDING, e.Bounds.Location.Y),
                 new Size(e.Bounds.Size.Width - SkinManager.FORM_PADDING * 2, e.Bounds.Size.Height),
@@ -384,7 +401,7 @@
                 var itemsList = this.Items.Cast<object>().Select(item => item.ToString());
                 foreach (string s in itemsList)
                 {
-                    int newWidth = NativeText.MeasureLogString(s, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Subtitle1)).Width + vertScrollBarWidth + padding;
+                    int newWidth = NativeText.MeasureLogString(s, SkinManager.getLogFontByType((MaterialSkinManager.fontType)_fontType)).Width + vertScrollBarWidth + padding;
                     if (w < newWidth) w = newWidth;
                 }
             }
@@ -395,5 +412,12 @@
                 Width = w;
             }
         }
+    }
+
+    // Font Handling
+    public enum ComboFontType
+    {
+        Subtitle1 = MaterialSkinManager.fontType.Subtitle1,
+        Subtitle2 = MaterialSkinManager.fontType.Subtitle2
     }
 }
