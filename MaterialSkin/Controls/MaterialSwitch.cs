@@ -24,7 +24,7 @@
 
         private bool _ripple;
 
-        [Category("Appearance")]
+        [Category("Material")]
         public bool Ripple
         {
             get { return _ripple; }
@@ -33,16 +33,74 @@
                 _ripple = value;
                 AutoSize = AutoSize; //Make AutoSize directly set the bounds.
 
+                //if (value)
+                //{
+                //    Margin = new Padding(0);
+                //}
+
                 if (value)
                 {
+                    if (AutoSize || Height < RIPPLE_DIAMETER)
+                        Height = RIPPLE_DIAMETER;
+
+                }
+                else
+                {
                     Margin = new Padding(0);
+                    if (AutoSize || Height < _thumb_size)
+                    {
+                        Height = _thumb_size;
+                    }
+
                 }
 
                 Invalidate();
             }
         }
 
-        [Category("Appearance")]
+        private MaterialSizeType sizeType = MaterialSizeType.Default;
+        [Category("Material")]
+        public MaterialSizeType SizeType
+        {
+            get
+            {
+                return this.sizeType;
+            }
+            set
+            {
+                this.sizeType = value;
+                if (this.sizeType == MaterialSizeType.Default)
+                {
+                    _thumb_size = THUMB_SIZE;
+                    _thumb_size_half = THUMB_SIZE_HALF;
+                    logFont = SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1);
+                    _text_offset = THUMB_SIZE;
+                }
+                else if(this.sizeType == MaterialSizeType.Small)
+                {
+                    _thumb_size = THUMB_SMALL_SIZE;
+                    _thumb_size_half = THUMB_SMALL_SIZE_HALF;
+                    logFont = SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body2);
+                    _text_offset = THUMB_SMALL_SIZE;
+                }
+                else
+                {
+                    _thumb_size = THUMB_SIZE;
+                    _thumb_size_half = THUMB_SIZE_HALF;
+                    logFont = SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1);
+                    _text_offset = THUMB_SIZE;
+                }
+                //
+                if (AutoSize)
+                {
+                    GetPreferredSize(Size.Empty);
+                }
+
+                Invalidate();
+            }
+        }
+
+        [Category("Material")]
         [Browsable(true), DefaultValue(false), EditorBrowsable(EditorBrowsableState.Always)]
         public bool ReadOnly { get; set; }
 
@@ -50,9 +108,18 @@
         private readonly AnimationManager _hoverAM;
         private readonly AnimationManager _rippleAM;
 
+        private int _thumb_size = THUMB_SIZE;
+        private int _thumb_size_half = THUMB_SIZE_HALF;
+        private IntPtr logFont = default;
+        private int _text_offset = THUMB_SIZE;
+
+
         private const int THUMB_SIZE = 22;
 
         private const int THUMB_SIZE_HALF = THUMB_SIZE / 2;
+
+        private const int THUMB_SMALL_SIZE = 16;
+        private const int THUMB_SMALL_SIZE_HALF = THUMB_SMALL_SIZE / 2;
 
         private const int TRACK_SIZE_HEIGHT = (int)(14);
         private const int TRACK_SIZE_WIDTH = (int)(36);
@@ -66,6 +133,10 @@
         private const int RIPPLE_DIAMETER = 37;
 
         private int _trackOffsetY;
+
+        private static readonly Point[] CheckmarkLine = { new Point(3, 8), new Point(7, 12), new Point(14, 5) };
+
+        //private const int TEXT_OFFSET = THUMB_SIZE;
 
         public MaterialSwitch()
         {
@@ -91,13 +162,15 @@
 
             CheckedChanged += (sender, args) =>
             {
-                if (Ripple)
+                //if (Ripple)
                     _checkAM.StartNewAnimation(Checked ? AnimationDirection.In : AnimationDirection.Out);
             };
 
+            SizeType = MaterialSizeType.Default;
             Ripple = true;
             MouseLocation = new Point(-1, -1);
             ReadOnly = false;
+            
         }
 
         protected override void OnClick(EventArgs e)
@@ -108,10 +181,17 @@
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
+            if (Ripple && Height < RIPPLE_DIAMETER)
+            {
+                Height = RIPPLE_DIAMETER;
+            }
+            else if (!Ripple && Height < _thumb_size)
+            {
+                Height = _thumb_size;
+            }
+            _trackOffsetY = Height / 2 - _thumb_size_half;//THUMB_SIZE_HALF;
 
-            _trackOffsetY = Height / 2 - THUMB_SIZE_HALF;
-
-            TRACK_CENTER_Y = _trackOffsetY + THUMB_SIZE_HALF - 1;
+            TRACK_CENTER_Y = _trackOffsetY + _thumb_size_half - 1;//THUMB_SIZE_HALF - 1;
             TRACK_CENTER_X_BEGIN = TRACK_CENTER_Y;
             TRACK_CENTER_X_END = TRACK_CENTER_X_BEGIN + TRACK_SIZE_WIDTH - (TRACK_RADIUS * 2);
             TRACK_CENTER_X_DELTA = TRACK_CENTER_X_END - TRACK_CENTER_X_BEGIN;
@@ -122,15 +202,13 @@
             Size strSize;
             using (NativeTextRenderer NativeText = new NativeTextRenderer(CreateGraphics()))
             {
-                strSize = NativeText.MeasureLogString(Text, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1));
+                strSize = NativeText.MeasureLogString(Text, logFont);//SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1));
             }
-            var w = TRACK_SIZE_WIDTH + THUMB_SIZE + strSize.Width;
-            return Ripple ? new Size(w, RIPPLE_DIAMETER) : new Size(w, THUMB_SIZE);
+            var w = TRACK_SIZE_WIDTH + _thumb_size + strSize.Width;//THUMB_SIZE + strSize.Width;
+            return Ripple ? new Size(w, RIPPLE_DIAMETER) : new Size(w, _thumb_size);//THUMB_SIZE);
         }
 
-        private static readonly Point[] CheckmarkLine = { new Point(3, 8), new Point(7, 12), new Point(14, 5) };
-
-        private const int TEXT_OFFSET = THUMB_SIZE;
+        
 
         protected override void OnPaint(PaintEventArgs pevent)
         {
@@ -199,7 +277,7 @@
             }
 
             // draw Thumb Shadow
-            RectangleF thumbBounds = new RectangleF(TRACK_CENTER_X_BEGIN + OffsetX - THUMB_SIZE_HALF, TRACK_CENTER_Y - THUMB_SIZE_HALF, THUMB_SIZE, THUMB_SIZE);
+            RectangleF thumbBounds = new RectangleF(TRACK_CENTER_X_BEGIN + OffsetX - _thumb_size_half, TRACK_CENTER_Y - _thumb_size_half, _thumb_size, _thumb_size);
             using (SolidBrush shadowBrush = new SolidBrush(Color.FromArgb(12, 0, 0, 0)))
             {
                 g.FillEllipse(shadowBrush, new RectangleF(thumbBounds.X - 2, thumbBounds.Y - 1, thumbBounds.Width + 4, thumbBounds.Height + 6));
@@ -218,10 +296,10 @@
             // draw text
             using (NativeTextRenderer NativeText = new NativeTextRenderer(g))
             {
-                Rectangle textLocation = new Rectangle(TEXT_OFFSET + TRACK_SIZE_WIDTH, 0, Width - (TEXT_OFFSET + TRACK_SIZE_WIDTH), Height);
+                Rectangle textLocation = new Rectangle(_text_offset + TRACK_SIZE_WIDTH, 0, Width - (_text_offset + TRACK_SIZE_WIDTH), Height);
                 NativeText.DrawTransparentText(
                     Text,
-                    SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1),
+                    logFont,//SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1),
                     Enabled ? SkinManager.TextHighEmphasisColor : SkinManager.TextDisabledOrHintColor,
                     textLocation.Location,
                     textLocation.Size,
@@ -231,7 +309,7 @@
 
         private Bitmap DrawCheckMarkBitmap()
         {
-            var checkMark = new Bitmap(THUMB_SIZE, THUMB_SIZE);
+            var checkMark = new Bitmap(_thumb_size, _thumb_size);
             var g = Graphics.FromImage(checkMark);
 
             // clear everything, transparent

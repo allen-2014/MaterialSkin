@@ -42,6 +42,7 @@ namespace MaterialSkinExample
             this.materialRadioButton2 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
             this.materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialCheckbox2 = new MaterialSkin.Controls.MaterialCheckbox();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,12 +104,12 @@ namespace MaterialSkinExample
             this.materialCard1.Controls.Add(this.materialLabel38);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard1.Location = new System.Drawing.Point(261, 50);
+            this.materialCard1.Location = new System.Drawing.Point(321, 50);
             this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(340, 187);
+            this.materialCard1.Size = new System.Drawing.Size(280, 187);
             this.materialCard1.TabIndex = 2;
             // 
             // materialLabel4
@@ -135,35 +136,38 @@ namespace MaterialSkinExample
             this.materialLabel38.Location = new System.Drawing.Point(38, 75);
             this.materialLabel38.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel38.Name = "materialLabel38";
-            this.materialLabel38.Size = new System.Drawing.Size(267, 67);
+            this.materialLabel38.Size = new System.Drawing.Size(207, 67);
             this.materialLabel38.TabIndex = 4;
             this.materialLabel38.Text = "These are simple containers, but with a very nice shadow under them";
             // 
             // materialSwitch1
             // 
             this.materialSwitch1.Depth = 0;
-            this.materialSwitch1.Location = new System.Drawing.Point(54, 118);
+            this.materialSwitch1.Location = new System.Drawing.Point(54, 135);
             this.materialSwitch1.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitch1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitch1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSwitch1.Name = "materialSwitch1";
-            this.materialSwitch1.Ripple = true;
-            this.materialSwitch1.Size = new System.Drawing.Size(206, 35);
+            this.materialSwitch1.Ripple = false;
+            this.materialSwitch1.Size = new System.Drawing.Size(173, 32);
+            this.materialSwitch1.SizeType = MaterialSkin.MaterialSizeType.Small;
             this.materialSwitch1.TabIndex = 3;
             this.materialSwitch1.Text = "materialSwitch1";
             this.materialSwitch1.UseVisualStyleBackColor = true;
             // 
             // materialCheckbox1
             // 
+            this.materialCheckbox1.AutoSize = true;
             this.materialCheckbox1.Depth = 0;
-            this.materialCheckbox1.Location = new System.Drawing.Point(54, 65);
+            this.materialCheckbox1.Location = new System.Drawing.Point(54, 50);
             this.materialCheckbox1.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckbox1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckbox1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckbox1.Name = "materialCheckbox1";
             this.materialCheckbox1.ReadOnly = false;
-            this.materialCheckbox1.Ripple = true;
-            this.materialCheckbox1.Size = new System.Drawing.Size(173, 40);
+            this.materialCheckbox1.Ripple = false;
+            this.materialCheckbox1.Size = new System.Drawing.Size(145, 20);
+            this.materialCheckbox1.SizeType = MaterialSkin.MaterialSizeType.Small;
             this.materialCheckbox1.TabIndex = 4;
             this.materialCheckbox1.Text = "materialCheckbox1";
             this.materialCheckbox1.UseVisualStyleBackColor = true;
@@ -203,9 +207,9 @@ namespace MaterialSkinExample
             this.materialRadioButton1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRadioButton1.Name = "materialRadioButton1";
-            this.materialRadioButton1.Ripple = false;
-            this.materialRadioButton1.Size = new System.Drawing.Size(69, 20);
-            this.materialRadioButton1.SizeType = MaterialSkin.Controls.MaterialSizeType.Small;
+            this.materialRadioButton1.Ripple = true;
+            this.materialRadioButton1.Size = new System.Drawing.Size(77, 37);
+            this.materialRadioButton1.SizeType = MaterialSkin.MaterialSizeType.Small;
             this.materialRadioButton1.TabIndex = 7;
             this.materialRadioButton1.TabStop = true;
             this.materialRadioButton1.Text = "01 USD";
@@ -221,9 +225,9 @@ namespace MaterialSkinExample
             this.materialRadioButton2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRadioButton2.Name = "materialRadioButton2";
-            this.materialRadioButton2.Ripple = false;
-            this.materialRadioButton2.Size = new System.Drawing.Size(69, 20);
-            this.materialRadioButton2.SizeType = MaterialSkin.Controls.MaterialSizeType.Small;
+            this.materialRadioButton2.Ripple = true;
+            this.materialRadioButton2.Size = new System.Drawing.Size(77, 37);
+            this.materialRadioButton2.SizeType = MaterialSkin.MaterialSizeType.Small;
             this.materialRadioButton2.TabIndex = 7;
             this.materialRadioButton2.TabStop = true;
             this.materialRadioButton2.Text = "02 USD";
@@ -292,12 +296,29 @@ namespace MaterialSkinExample
             this.materialTextBox21.UseSystemPasswordChar = false;
             this.materialTextBox21.UseTallSize = false;
             // 
+            // materialCheckbox2
+            // 
+            this.materialCheckbox2.Depth = 0;
+            this.materialCheckbox2.Location = new System.Drawing.Point(53, 90);
+            this.materialCheckbox2.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckbox2.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckbox2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckbox2.Name = "materialCheckbox2";
+            this.materialCheckbox2.ReadOnly = false;
+            this.materialCheckbox2.Ripple = true;
+            this.materialCheckbox2.Size = new System.Drawing.Size(174, 37);
+            this.materialCheckbox2.SizeType = MaterialSkin.MaterialSizeType.Small;
+            this.materialCheckbox2.TabIndex = 10;
+            this.materialCheckbox2.Text = "materialCheckbox2";
+            this.materialCheckbox2.UseVisualStyleBackColor = true;
+            // 
             // FormMDialog2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ButtonUseAccentColor = true;
             this.ClientSize = new System.Drawing.Size(675, 369);
+            this.Controls.Add(this.materialCheckbox2);
             this.Controls.Add(this.materialTextBox21);
             this.Controls.Add(this.materialComboBox1);
             this.Controls.Add(this.materialRadioButton2);
@@ -339,5 +360,6 @@ namespace MaterialSkinExample
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
         private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
         private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
+        private MaterialSkin.Controls.MaterialCheckbox materialCheckbox2;
     }
 }

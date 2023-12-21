@@ -35,18 +35,13 @@
 
                 if (value)
                 {
-                    if (Height < HEIGHT_RIPPLE)
+                    if (AutoSize || Height < HEIGHT_RIPPLE)
                         Height = HEIGHT_RIPPLE;
-                    if (AutoSize)
-                    {
-                        Height = HEIGHT_RIPPLE;
-                    }
-                        
                 }
                 else
                 {
                     Margin = new Padding(0);
-                    if (AutoSize)
+                    if (AutoSize || Height < _radioButtonBounds.Height)
                     {
                         Height = _radioButtonBounds.Height;
                     }
@@ -168,6 +163,14 @@
 
         private void OnSizeChanged(object sender, EventArgs eventArgs)
         {
+            if (Ripple && Height < HEIGHT_RIPPLE)
+            {
+                Height = HEIGHT_RIPPLE;
+            }
+            else if (!Ripple && Height < HEIGHT_NO_RIPPLE)
+            {
+                Height = HEIGHT_NO_RIPPLE;
+            }
             //minus 1 for radio button and text can have the same horizon
             _boxOffset = Height / 2 - (int)(_radioButtonSize / 2) - 1;
             _radioSizeHalf = _radioButtonSize / 2;
@@ -401,9 +404,5 @@
             };
         }
     }
-    public enum MaterialSizeType
-    {
-        Default,
-        Small
-    }
+
 }

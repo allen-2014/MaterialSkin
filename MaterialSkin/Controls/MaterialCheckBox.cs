@@ -25,7 +25,7 @@
 
         private bool _ripple;
 
-        [Category("Appearance")]
+        [Category("Material")]
         public bool Ripple
         {
             get { return _ripple; }
@@ -34,15 +34,79 @@
                 _ripple = value;
                 AutoSize = AutoSize; //Make AutoSize directly set the bounds.
 
+                //if (value)
+                //{
+                //    Margin = new Padding(0);
+                //}
+
                 if (value)
                 {
+                    if (AutoSize || Height < HEIGHT_RIPPLE)
+                        Height = HEIGHT_RIPPLE;
+
+                }
+                else
+                {
                     Margin = new Padding(0);
+
+                    if (AutoSize || Height < HEIGHT_NO_RIPPLE)
+                    {
+                        Height = HEIGHT_NO_RIPPLE;
+                    }
+
                 }
 
                 Invalidate();
             }
         }
 
+        private MaterialSizeType sizeType = MaterialSizeType.Default;
+        [Category("Material")]
+        public MaterialSizeType SizeType
+        {
+            get
+            {
+                return this.sizeType;
+            }
+            set
+            {
+                this.sizeType = value;
+                if (this.sizeType == MaterialSizeType.Default)
+                {
+                    _checkbox_size = CHECKBOX_SIZE;
+                    _checkbox_size_half = CHECKBOX_SIZE_HALF;
+                    logFont = SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1);
+                    _text_offset = TEXT_OFFSET;
+                    CheckmarkLine = new Point[]{ new Point(3, 8), new Point(7, 12), new Point(14, 5) };
+                }
+                else if (this.sizeType == MaterialSizeType.Small)
+                {
+                    _checkbox_size = CHECKBOX_SMALL_SIZE;
+                    _checkbox_size_half = CHECKBOX_SMALL_SIZE_HALF;
+                    logFont = SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body2);
+                    _text_offset = TEXT_SMALL_OFFSET;
+                    CheckmarkLine = new Point[] { new Point(1, 4), new Point(5, 8), new Point(11, 2) };
+                }
+                else
+                {
+                    _checkbox_size = CHECKBOX_SIZE;
+                    _checkbox_size_half = CHECKBOX_SIZE_HALF;
+                    logFont = SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1);
+                    _text_offset = TEXT_OFFSET;
+                    CheckmarkLine = new Point[] { new Point(3, 8), new Point(7, 12), new Point(14, 5) };
+                }
+                _boxOffset = Height / 2 - _checkbox_size_half + 1;
+                //
+                if (AutoSize)
+                {
+                    GetPreferredSize(Size.Empty);
+                }
+
+                Invalidate();
+            }
+        }
+
+        [Category("Material")]
         [Browsable(true)]
         public bool ReadOnly { get; set; }
         #endregion
@@ -56,10 +120,22 @@
         private const int TEXT_OFFSET = 26;
         private const int CHECKBOX_SIZE = 18;
         private const int CHECKBOX_SIZE_HALF = CHECKBOX_SIZE / 2;
+
+        private const int CHECKBOX_SMALL_SIZE = 12;
+        private const int CHECKBOX_SMALL_SIZE_HALF = CHECKBOX_SMALL_SIZE / 2;
+        private const int TEXT_SMALL_OFFSET = 20;
+
         private int _boxOffset;
-        private static readonly Point[] CheckmarkLine = { new Point(3, 8), new Point(7, 12), new Point(14, 5) };
+        private Point[] CheckmarkLine = { new Point(3, 8), new Point(7, 12), new Point(14, 5) };
+        
         private bool hovered = false;
         private CheckState _oldCheckState;
+
+
+        private int _checkbox_size = CHECKBOX_SIZE;
+        private int _checkbox_size_half = CHECKBOX_SIZE_HALF;
+        private IntPtr logFont = default;
+        private int _text_offset = TEXT_OFFSET;
         #endregion
 
         #region Constructor
@@ -83,15 +159,16 @@
             };
             CheckedChanged += (sender, args) =>
             {
-                if (Ripple)
+                //if (Ripple)
                     _checkAM.StartNewAnimation(Checked ? AnimationDirection.In : AnimationDirection.Out);
             };
             _checkAM.OnAnimationProgress += sender => Invalidate();
             _hoverAM.OnAnimationProgress += sender => Invalidate();
             _rippleAM.OnAnimationProgress += sender => Invalidate();
 
+            SizeType = MaterialSizeType.Default;
             Ripple = true;
-            Height = HEIGHT_RIPPLE;
+            //Height = HEIGHT_RIPPLE;
             MouseLocation = new Point(-1, -1);
         }
         #endregion
@@ -100,8 +177,15 @@
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
-
-            _boxOffset = HEIGHT_RIPPLE / 2 - 9;
+            if(Ripple && Height < HEIGHT_RIPPLE)
+            {
+                Height = HEIGHT_RIPPLE;
+            }
+            else if(!Ripple && Height < HEIGHT_NO_RIPPLE)
+            {
+                Height = HEIGHT_NO_RIPPLE;
+            }
+            _boxOffset = Height / 2 - _checkbox_size_half+1;//HEIGHT_RIPPLE / 2 - 9;
         }
 
         public override Size GetPreferredSize(Size proposedSize)
@@ -110,10 +194,10 @@
 
             using (NativeTextRenderer NativeText = new NativeTextRenderer(CreateGraphics()))
             {
-                strSize = NativeText.MeasureLogString(Text, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1));
+                strSize = NativeText.MeasureLogString(Text, logFont);
             }
 
-            int w = _boxOffset + TEXT_OFFSET + strSize.Width;
+            int w = _boxOffset + _text_offset + strSize.Width;
             return Ripple ? new Size(w, HEIGHT_RIPPLE) : new Size(w, HEIGHT_NO_RIPPLE);
         }
 
@@ -126,7 +210,7 @@
             // clear the control
             g.Clear(Parent.BackColor);
 
-            int CHECKBOX_CENTER = _boxOffset + CHECKBOX_SIZE_HALF - 1;
+            int CHECKBOX_CENTER = Height / 2;//_boxOffset + _checkbox_size_half - 1;
             Point animationSource = new Point(CHECKBOX_CENTER, CHECKBOX_CENTER);
             double animationProgress = _checkAM.GetProgress();
 
@@ -165,8 +249,8 @@
                 }
             }
 
-            Rectangle checkMarkLineFill = new Rectangle(_boxOffset, _boxOffset, (int)(CHECKBOX_SIZE * animationProgress), CHECKBOX_SIZE);
-            using (GraphicsPath checkmarkPath = DrawHelper.CreateRoundRect(_boxOffset - 0.5f, _boxOffset - 0.5f, CHECKBOX_SIZE, CHECKBOX_SIZE, 1))
+            Rectangle checkMarkLineFill = new Rectangle(_boxOffset, _boxOffset, (int)(_checkbox_size * animationProgress), _checkbox_size);
+            using (GraphicsPath checkmarkPath = DrawHelper.CreateRoundRect(_boxOffset - 0.5f, _boxOffset - 0.5f, _checkbox_size, _checkbox_size, 1))
             {
                 if (Enabled)
                 {
@@ -192,8 +276,8 @@
             // draw checkbox text
             using (NativeTextRenderer NativeText = new NativeTextRenderer(g))
             {
-                Rectangle textLocation = new Rectangle(_boxOffset + TEXT_OFFSET, 0, Width - (_boxOffset + TEXT_OFFSET), HEIGHT_RIPPLE);
-                NativeText.DrawTransparentText(Text, SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body1),
+                Rectangle textLocation = new Rectangle(_boxOffset + _text_offset, 0, Width - (_boxOffset + _text_offset), Height);
+                NativeText.DrawTransparentText(Text, logFont,
                     Enabled ? SkinManager.TextHighEmphasisColor : SkinManager.TextDisabledOrHintColor,
                     textLocation.Location,
                     textLocation.Size,
@@ -213,7 +297,8 @@
                 base.AutoSize = value;
                 if (value)
                 {
-                    Size = new Size(10, 10);
+                    //Size = new Size(10, 10);
+                    GetPreferredSize(Size.Empty);
                 }
             }
         }
@@ -320,7 +405,7 @@
         #region Private events and methods
         private Bitmap DrawCheckMarkBitmap()
         {
-            Bitmap checkMark = new Bitmap(CHECKBOX_SIZE, CHECKBOX_SIZE);
+            Bitmap checkMark = new Bitmap(_checkbox_size, _checkbox_size);
             Graphics g = Graphics.FromImage(checkMark);
 
             // clear everything, transparent

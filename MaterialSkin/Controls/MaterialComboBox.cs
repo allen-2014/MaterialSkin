@@ -66,9 +66,9 @@
             }
         }
 
-        private ComboFontType _fontType = ComboFontType.Subtitle2;
+        private ComboFontType _fontType = ComboFontType.Subtitle1;
         
-        [Category("Material Skin"), DefaultValue(ComboFontType.Subtitle2)]
+        [Category("Material Skin"), DefaultValue(ComboFontType.Subtitle1)]
         public ComboFontType FontType
         {
             get

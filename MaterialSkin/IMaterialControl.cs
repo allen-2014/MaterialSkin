@@ -41,4 +41,12 @@
         /// </summary>
         OUT
     }
+    /// <summary>
+    /// Defines Control size type
+    /// </summary>
+    public enum MaterialSizeType
+    {
+        Default,
+        Small
+    }
 }
