@@ -219,6 +219,18 @@
             set
             {
                 _cc = value;
+                if (_cc == CharacterCasingEnum.Upper)
+                {
+                    _textSize = CreateGraphics().MeasureString(base.Text.ToUpper(), SkinManager.getFontByType(MaterialSkinManager.fontType.Button));
+                }
+                else if (_cc == CharacterCasingEnum.Title || _cc == CharacterCasingEnum.Normal)
+                {
+                    _textSize = CreateGraphics().MeasureString(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(base.Text.ToLower()), SkinManager.getFontByType(MaterialSkinManager.fontType.Button));
+                }
+                else if (_cc == CharacterCasingEnum.Lower)
+                {
+                    _textSize = CreateGraphics().MeasureString(base.Text.ToLower(), SkinManager.getFontByType(MaterialSkinManager.fontType.Button));
+                }
                 Invalidate();
             }
         }
@@ -335,6 +347,7 @@
             Density = MaterialButtonDensity.Default;
             NoAccentTextColor = Color.Empty;
             CharacterCasing = CharacterCasingEnum.Upper;
+            Text = string.Empty;
 
             _animationManager = new AnimationManager(false)
             {
@@ -413,7 +426,20 @@
             {
                 base.Text = value;
                 if (!String.IsNullOrEmpty(value))
-                    _textSize = CreateGraphics().MeasureString(value.ToUpper(), SkinManager.getFontByType(MaterialSkinManager.fontType.Button));
+                {
+                    if (_cc == CharacterCasingEnum.Upper)
+                    {
+                        _textSize = CreateGraphics().MeasureString(value.ToUpper(), SkinManager.getFontByType(MaterialSkinManager.fontType.Button));
+                    }
+                    else if (_cc == CharacterCasingEnum.Title || _cc == CharacterCasingEnum.Normal)
+                    {
+                        _textSize = CreateGraphics().MeasureString(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower()), SkinManager.getFontByType(MaterialSkinManager.fontType.Button));
+                    }
+                    else if (_cc == CharacterCasingEnum.Lower)
+                    {
+                        _textSize = CreateGraphics().MeasureString(value.ToLower(), SkinManager.getFontByType(MaterialSkinManager.fontType.Button));
+                    }
+                }
                 else
                 {
                     _textSize.Width = 0;
@@ -750,12 +776,15 @@
                 s.Width = (int)Math.Ceiling(_textSize.Width);
                 s.Width += extra;
                 s.Height = HEIGHTDEFAULT;
+                if (_density == MaterialButtonDensity.Dense)
+                    s.Height = HEIGHTDENSE;
             }
             else
             {
                 s.Width += extra;
                 s.Height = HEIGHTDEFAULT;
             }
+
             if (Icon != null && Text.Length==0 && s.Width < MINIMUMWIDTHICONONLY) s.Width = MINIMUMWIDTHICONONLY;
             else if (s.Width < MINIMUMWIDTH) s.Width = MINIMUMWIDTH;
 

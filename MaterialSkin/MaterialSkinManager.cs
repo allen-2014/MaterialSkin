@@ -235,7 +235,15 @@
         private static readonly Brush BACKGROUND_DISABLED_LIGHT_BRUSH = new SolidBrush(BACKGROUND_DISABLED_LIGHT);
         private static readonly Color BACKGROUND_DISABLED_DARK = Color.FromArgb(25, 255, 255, 255);
         private static readonly Brush BACKGROUND_DISABLED_DARK_BRUSH = new SolidBrush(BACKGROUND_DISABLED_DARK);
+        //
+        private static readonly Color BACKGROUND_LIGHT_SUCCESS = Color.FromArgb(255, 240, 249, 236);
+        private static readonly Color BACKGROUND_LIGHT_WARNING = Color.FromArgb(255, 253, 246, 236);
+        private static readonly Color BACKGROUND_LIGHT_DANGER = Color.FromArgb(255, 254, 240, 240);
 
+        private static readonly Color BACKGROUND_DARK_SUCCESS = Color.FromArgb(128, 97, 213, 40);
+        private static readonly Color BACKGROUND_DARK_WARNING = Color.FromArgb(128, 227, 227, 60);
+        private static readonly Color BACKGROUND_DARK_DANGER = Color.FromArgb(128, 245, 108, 108);
+        
         //Expansion Panel colors
         private static readonly Color EXPANSIONPANEL_FOCUS_LIGHT = Color.FromArgb(255, 242, 242, 242);
         private static readonly Brush EXPANSIONPANEL_FOCUS_LIGHT_BRUSH = new SolidBrush(EXPANSIONPANEL_FOCUS_LIGHT);
@@ -306,6 +314,9 @@
         // SnackBar
         public Color SnackBarTextHighEmphasisColor => Theme != Themes.LIGHT ? TEXT_HIGH_EMPHASIS_DARK : TEXT_HIGH_EMPHASIS_LIGHT;
         public Color SnackBarBackgroundColor => Theme != Themes.LIGHT ? BACKGROUND_LIGHT : BACKGROUND_DARK;
+        public Color SnackBarBackgroundSuccessColor => Theme != Themes.LIGHT ? BACKGROUND_LIGHT_SUCCESS: BACKGROUND_DARK_SUCCESS;
+        public Color SnackBarBackgroundWarningColor => Theme != Themes.LIGHT ? BACKGROUND_LIGHT_WARNING: BACKGROUND_DARK_WARNING;
+        public Color SnackBarBackgroundDangerColor => Theme != Themes.LIGHT ? BACKGROUND_LIGHT_DANGER: BACKGROUND_DARK_DANGER;
         public Color SnackBarTextButtonNoAccentTextColor => Theme != Themes.LIGHT ? ColorScheme.PrimaryColor : ColorScheme.LightPrimaryColor;
 
         // Backdrop color

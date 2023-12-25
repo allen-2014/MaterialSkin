@@ -56,7 +56,6 @@
                 _duration.Interval = value;
             }
         }
-
         private String _text;
         /// <summary>
         /// The Text which gets displayed as the Content
@@ -121,22 +120,42 @@
         /// <summary>
         /// Constructer Setting up the Layout
         /// </summary>
-        public MaterialSnackBar(string Text, int Duration, bool ShowActionButton, string ActionButtonText, bool UseAccentColor)
+        public MaterialSnackBar(string Text, int Duration, bool ShowActionButton, string ActionButtonText, bool UseAccentColor, SnackBarType snackBarType)
         {
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.Text = Text;
             this.Duration = Duration;
             TopMost = true;
             ShowInTaskbar = false;
             Sizable = false;
 
-            BackColor = SkinManager.SnackBarBackgroundColor;
+            if(snackBarType == SnackBarType.Info)
+            {
+                BackColor = SkinManager.SnackBarBackgroundColor;
+            }
+            else if(snackBarType == SnackBarType.Danger)
+            {
+                BackColor = SkinManager.SnackBarBackgroundDangerColor;
+            }
+            else if(snackBarType == SnackBarType.Suceesss)
+            {
+                BackColor = SkinManager.SnackBarBackgroundSuccessColor;
+            }
+            else if(snackBarType == SnackBarType.Warning)
+            {
+                BackColor = SkinManager.SnackBarBackgroundWarningColor;
+            }
             FormStyle = FormStyles.StatusAndActionBar_None;
 
             this.ActionButtonText = ActionButtonText;
             this.UseAccentColor = UseAccentColor;
             Height = 48;
+            Width = 568;
             MinimumSize = new System.Drawing.Size(344, 48);
-            MaximumSize = new System.Drawing.Size(568, 48);
+            
+            //MaximumSize = new System.Drawing.Size(568, 48);
+
+            
 
             this.ShowActionButton = ShowActionButton;
 
@@ -175,31 +194,45 @@
 
         }
 
-        public MaterialSnackBar() : this("SnackBar Text", 3000, false, "OK", false)
+        public MaterialSnackBar() : this("SnackBar Text", 3000, false, "OK", false, SnackBarType.Info)
         {
         }
 
-        public MaterialSnackBar(string Text) : this(Text, 3000, false, "OK", false)
+        public MaterialSnackBar(string Text) : this(Text, 3000, false, "OK", false, SnackBarType.Info)
         {
         }
 
-        public MaterialSnackBar(string Text, int Duration) : this(Text, Duration, false, "OK", false)
+        public MaterialSnackBar(string Text, SnackBarType snackBarType) : this(Text, 3000, false, "OK", false, snackBarType)
         {
         }
-
-        public MaterialSnackBar(string Text, string ActionButtonText) : this(Text, 3000, true, ActionButtonText, false)
+        public MaterialSnackBar(string Text, int Duration) : this(Text, Duration, false, "OK", false, SnackBarType.Info)
         {
         }
-
-        public MaterialSnackBar(string Text, string ActionButtonText, bool UseAccentColor) : this(Text, 3000, true, ActionButtonText, UseAccentColor)
+        public MaterialSnackBar(string Text, int Duration, SnackBarType snackBarType) : this(Text, Duration, false, "OK", false, snackBarType)
         {
         }
-
-        public MaterialSnackBar(string Text, int Duration, string ActionButtonText) : this(Text, Duration, true, ActionButtonText, false)
+        public MaterialSnackBar(string Text, string ActionButtonText) : this(Text, 3000, true, ActionButtonText, false, SnackBarType.Info)
         {
         }
-
-        public MaterialSnackBar(string Text, int Duration, string ActionButtonText, bool UseAccentColor) : this(Text, Duration, true, ActionButtonText, UseAccentColor)
+        public MaterialSnackBar(string Text, string ActionButtonText, SnackBarType snackBarType) : this(Text, 3000, true, ActionButtonText, false, snackBarType)
+        {
+        }
+        public MaterialSnackBar(string Text, string ActionButtonText, bool UseAccentColor) : this(Text, 3000, true, ActionButtonText, UseAccentColor, SnackBarType.Info)
+        {
+        }
+        public MaterialSnackBar(string Text, string ActionButtonText, bool UseAccentColor, SnackBarType snackBarType) : this(Text, 3000, true, ActionButtonText, UseAccentColor, snackBarType)
+        {
+        }
+        public MaterialSnackBar(string Text, int Duration, string ActionButtonText) : this(Text, Duration, true, ActionButtonText, false, SnackBarType.Info)
+        {
+        }
+        public MaterialSnackBar(string Text, int Duration, string ActionButtonText, SnackBarType snackBarType) : this(Text, Duration, true, ActionButtonText, false, snackBarType)
+        {
+        }
+        public MaterialSnackBar(string Text, int Duration, string ActionButtonText, bool UseAccentColor) : this(Text, Duration, true, ActionButtonText, UseAccentColor, SnackBarType.Info)
+        {
+        }
+        public MaterialSnackBar(string Text, int Duration, string ActionButtonText, bool UseAccentColor, SnackBarType snackBarType) : this(Text, Duration, true, ActionButtonText, UseAccentColor, snackBarType)
         {
         }
 
@@ -222,7 +255,28 @@
             _actionButton.Left = Width - BUTTON_PADDING - _actionButton.Width;  //Button minimum width management
             _actionButton.Visible = _showActionButton;
 
-            Width = TextRenderer.MeasureText(_text, SkinManager.getFontByType(MaterialSkinManager.fontType.Body2)).Width + (2 * LEFT_RIGHT_PADDING) + _actionButton.Width + 48;
+            //make multi-line to one line,then measure the text width
+            string _text_tmp = _text.Replace(Environment.NewLine, "").Replace("\r", "").Replace("\n", "");
+            Size txtSize = TextRenderer.MeasureText(_text_tmp, SkinManager.getFontByType(MaterialSkinManager.fontType.Body2));
+            
+            int lineCnt = 1;
+            if(txtSize.Width > Width)
+            {
+                lineCnt = txtSize.Width % Width > 0 ? txtSize.Width / Width + 1 : txtSize.Width / Width;
+                if (lineCnt > 1)
+                {
+                    //head space and tail space of text total is 38,
+                    //middle space between lines is 10
+                    //so total height = 38 + one line height * line count + 10 * (line count -1)
+                    Height = 38 + txtSize.Height * lineCnt + (lineCnt - 1) * 10;
+                    _actionButton.Top = Height - TOP_PADDING_SINGLE_LINE - _actionButton.Height;
+                }
+            }
+            else
+                Width = txtSize.Width + (2 * LEFT_RIGHT_PADDING) + _actionButton.Width + 48;
+
+            //Width = TextRenderer.MeasureText(_text, SkinManager.getFontByType(MaterialSkinManager.fontType.Body2)).Width + (2 * LEFT_RIGHT_PADDING) + _actionButton.Width + 48;
+
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 6, 6));
 
         }
@@ -238,7 +292,6 @@
         {
             base.OnResize(e);
             UpdateRects();
-
         }
 
         /// <summary>
@@ -281,12 +334,12 @@
                 0,
                 Width - (2 * LEFT_RIGHT_PADDING) - _actionButton.Width,
                 Height);
-
+            
             //Draw  Text
             using (NativeTextRenderer NativeText = new NativeTextRenderer(g))
             {
                 // Draw header text
-                NativeText.DrawTransparentText(
+                NativeText.DrawMultilineTransparentText(
                     _text,
                     SkinManager.getLogFontByType(MaterialSkinManager.fontType.Body2),
                     SkinManager.SnackBarTextHighEmphasisColor,
@@ -366,5 +419,12 @@
             }
         }
 
+        public enum SnackBarType
+        {
+            Info,
+            Suceesss,
+            Warning,
+            Danger
+        }
     }
 }

@@ -418,6 +418,6 @@
     public enum ComboFontType
     {
         Subtitle1 = MaterialSkinManager.fontType.Subtitle1,
-        Subtitle2 = MaterialSkinManager.fontType.Subtitle2
+        Subtitle2 = MaterialSkinManager.fontType.Body2
     }
 }

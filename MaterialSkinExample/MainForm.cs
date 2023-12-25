@@ -196,7 +196,7 @@ namespace MaterialSkinExample
 
         private void materialButton6_Click(object sender, EventArgs e)
         {
-            MaterialSnackBar SnackBarMessage = new MaterialSnackBar("SnackBar started succesfully", "OK", true);
+            MaterialSnackBar SnackBarMessage = new MaterialSnackBar("SnackBar started succesfully", "OK", true, MaterialSnackBar.SnackBarType.Info);
             SnackBarMessage.Show(this);
         }
 
@@ -294,6 +294,24 @@ namespace MaterialSkinExample
             DialogResult result = materialDialog.ShowDialog(this);
 
             MaterialSnackBar SnackBarMessage = new MaterialSnackBar(result.ToString(), 750);
+            SnackBarMessage.Show(this);
+        }
+
+        private void materialButton27_Click(object sender, EventArgs e)
+        {
+            MaterialSnackBar SnackBarMessage = new MaterialSnackBar("SnackBar started succesfully", "OK", true, MaterialSnackBar.SnackBarType.Suceesss);
+            SnackBarMessage.Show(this);
+        }
+
+        private void materialButton29_Click(object sender, EventArgs e)
+        {
+            MaterialSnackBar SnackBarMessage = new MaterialSnackBar("SnackBar started succesfully", "OK", true, MaterialSnackBar.SnackBarType.Warning);
+            SnackBarMessage.Show(this);
+        }
+
+        private void materialButton28_Click(object sender, EventArgs e)
+        {
+            MaterialSnackBar SnackBarMessage = new MaterialSnackBar("SnackBar started succesfully,SnackBar started succesfully,SnackBar started succesfully,"  + Environment.NewLine + "SnackBar started succesfully,SnackBar started succesfully,SnackBar started succesfully,SnackBar started succesfully,SnackBar started succesfully", "OK", true, MaterialSnackBar.SnackBarType.Danger);
             SnackBarMessage.Show(this);
         }
     }

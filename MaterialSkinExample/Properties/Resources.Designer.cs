@@ -133,6 +133,16 @@ namespace MaterialSkinExample.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap recharge_zh_white {
+            get {
+                object obj = ResourceManager.GetObject("recharge_zh_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap round_add_black_24dp {
             get {
                 object obj = ResourceManager.GetObject("round_add_black_24dp", resourceCulture);
@@ -236,6 +246,16 @@ namespace MaterialSkinExample.Properties {
         internal static System.Drawing.Bitmap round_swap_vert_white_24dp {
             get {
                 object obj = ResourceManager.GetObject("round_swap_vert_white_24dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap 充值__6_ {
+            get {
+                object obj = ResourceManager.GetObject("充值 (6)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
