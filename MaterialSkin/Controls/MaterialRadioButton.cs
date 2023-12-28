@@ -272,6 +272,7 @@
                 }
             }
 
+            //draw dot
             if (Checked)
             {
                 float ellipseWidth = animationSize;

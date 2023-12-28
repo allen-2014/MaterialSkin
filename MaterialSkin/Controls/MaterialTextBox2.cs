@@ -124,6 +124,7 @@ namespace MaterialSkin.Controls
         [Category("Material Skin"), DefaultValue(true)]
         public bool UseAccent { get; set; }
 
+
         private Image _leadingIcon;
 
         [Category("Material Skin"), Browsable(true), Localizable(false)]
@@ -142,6 +143,24 @@ namespace MaterialSkin.Controls
             }
         }
 
+        private int _leadingIconSize = ICON_SIZE;
+        [Category("Material Skin"), Browsable(true), Localizable(false)]
+        public int LeadingIconSize
+        {
+            get { return _leadingIconSize; }
+            set
+            {
+                _leadingIconSize = value;
+                if (_leadingIconSize > ICON_SIZE || _leadingIconSize <= 0)
+                    _leadingIconSize = ICON_SIZE;
+                
+                UpdateRects();
+                preProcessIcons();
+                Invalidate();
+            }
+        }
+
+
         private Image _trailingIcon;
 
         [Category("Material Skin"), Browsable(true), Localizable(false)]
@@ -159,6 +178,24 @@ namespace MaterialSkin.Controls
                 Invalidate();
             }
         }
+
+        private int _trailingIconSize = ICON_SIZE;
+        [Category("Material Skin"), Browsable(true), Localizable(false)]
+        public int TrailingIconSize
+        {
+            get { return _trailingIconSize; }
+            set
+            {
+                _trailingIconSize = value;
+                if (_trailingIconSize > ICON_SIZE || _trailingIconSize <= 0)
+                    _trailingIconSize = ICON_SIZE;
+
+                UpdateRects();
+                preProcessIcons();
+                Invalidate();
+            }
+        }
+
         private int _heightPaddingExtra1 = 2;
         private int _heightPaddingExtra2 = 1;
 
@@ -1682,31 +1719,33 @@ namespace MaterialSkin.Controls
 
         #region Icon
 
-        private static Size ResizeIcon(Image Icon)
+        private Size ResizeIcon(Image Icon, bool bLeading)
         {
             int newWidth, newHeight;
+            int icon_size = _leadingIconSize;
+            if (!bLeading) icon_size = _trailingIconSize;
             //Resize icon if greater than ICON_SIZE
-            if (Icon.Width > ICON_SIZE || Icon.Height > ICON_SIZE)
+            if (Icon.Width > icon_size || Icon.Height > icon_size)
             {
                 //calculate aspect ratio
                 float aspect = Icon.Width / (float)Icon.Height;
 
                 //calculate new dimensions based on aspect ratio
-                newWidth = (int)(ICON_SIZE * aspect);
+                newWidth = (int)(icon_size * aspect);
                 newHeight = (int)(newWidth / aspect);
 
                 //if one of the two dimensions exceed the box dimensions
-                if (newWidth > ICON_SIZE || newHeight > ICON_SIZE)
+                if (newWidth > icon_size || newHeight > icon_size)
                 {
                     //depending on which of the two exceeds the box dimensions set it as the box dimension and calculate the other one based on the aspect ratio
                     if (newWidth > newHeight)
                     {
-                        newWidth = ICON_SIZE;
+                        newWidth = icon_size;
                         newHeight = (int)(newWidth / aspect);
                     }
                     else
                     {
-                        newHeight = ICON_SIZE;
+                        newHeight = icon_size;
                         newWidth = (int)(newHeight * aspect);
                     }
                 }
@@ -1761,16 +1800,18 @@ namespace MaterialSkin.Controls
             iconsErrorBrushes = new Dictionary<string, TextureBrush>(2);
 
             // Image Rect
-            Rectangle destRect = new Rectangle(0, 0, ICON_SIZE, ICON_SIZE);
+            //Rectangle destRect = new Rectangle(0, 0, ICON_SIZE, ICON_SIZE);
+            Rectangle destRect = default;//new Rectangle(0, 0, _leadingIconSize, _leadingIconSize);
 
             if (_leadingIcon != null)
             {
                 // ********************
                 // *** _leadingIcon ***
                 // ********************
+                destRect = new Rectangle(0, 0, _leadingIconSize, _leadingIconSize);
 
                 //Resize icon if greater than ICON_SIZE
-                Size newSize_leadingIcon = ResizeIcon(_leadingIcon);
+                Size newSize_leadingIcon = ResizeIcon(_leadingIcon, true);
                 Bitmap _leadingIconIconResized = new Bitmap(_leadingIcon, newSize_leadingIcon.Width, newSize_leadingIcon.Height);
 
                 // Create a pre-processed copy of the image (GRAY)
@@ -1826,8 +1867,9 @@ namespace MaterialSkin.Controls
                 // *** _trailingIcon ***
                 // *********************
 
+                destRect = new Rectangle(0, 0, _trailingIconSize, _trailingIconSize);
                 //Resize icon if greater than ICON_SIZE
-                Size newSize_trailingIcon = ResizeIcon(_trailingIcon);
+                Size newSize_trailingIcon = ResizeIcon(_trailingIcon, false);
                 Bitmap _trailingIconResized = new Bitmap(_trailingIcon, newSize_trailingIcon.Width, newSize_trailingIcon.Height);
 
                 // Create a pre-processed copy of the image (GRAY)
@@ -1890,12 +1932,12 @@ namespace MaterialSkin.Controls
         private void UpdateRects()
         {
             if (LeadingIcon != null)
-                _left_padding = LEFT_PADDING + ICON_SIZE;
+                _left_padding = LEFT_PADDING + _leadingIconSize;
             else
                 _left_padding = LEFT_PADDING;
 
             if (_trailingIcon != null)
-                _right_padding = RIGHT_PADDING + ICON_SIZE;
+                _right_padding = RIGHT_PADDING + _trailingIconSize;
             else
                 _right_padding = RIGHT_PADDING;
 
@@ -1934,8 +1976,8 @@ namespace MaterialSkin.Controls
                 baseTextBox.Height = FONT_HEIGHT;
             }
 
-            _leadingIconBounds = new Rectangle(8, ((LINE_Y + ACTIVATION_INDICATOR_HEIGHT) / 2) - (ICON_SIZE / 2), ICON_SIZE, ICON_SIZE);
-            _trailingIconBounds = new Rectangle(Width - (ICON_SIZE + 8), ((LINE_Y + ACTIVATION_INDICATOR_HEIGHT) / 2) - (ICON_SIZE / 2), ICON_SIZE, ICON_SIZE);
+            _leadingIconBounds = new Rectangle(8, ((LINE_Y + ACTIVATION_INDICATOR_HEIGHT) / 2) - (_leadingIconSize / 2), _leadingIconSize, _leadingIconSize);
+            _trailingIconBounds = new Rectangle(Width - (_trailingIconSize + 8), ((LINE_Y + ACTIVATION_INDICATOR_HEIGHT) / 2) - (_trailingIconSize / 2), _trailingIconSize, _trailingIconSize);
         }
 
         public void SetErrorState(bool ErrorState)

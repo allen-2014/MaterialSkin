@@ -240,9 +240,9 @@
         private static readonly Color BACKGROUND_LIGHT_WARNING = Color.FromArgb(255, 253, 246, 236);
         private static readonly Color BACKGROUND_LIGHT_DANGER = Color.FromArgb(255, 254, 240, 240);
 
-        private static readonly Color BACKGROUND_DARK_SUCCESS = Color.FromArgb(128, 97, 213, 40);
-        private static readonly Color BACKGROUND_DARK_WARNING = Color.FromArgb(128, 227, 227, 60);
-        private static readonly Color BACKGROUND_DARK_DANGER = Color.FromArgb(128, 245, 108, 108);
+        private static readonly Color BACKGROUND_DARK_SUCCESS = Color.FromArgb(255, 40, 128, 40);
+        private static readonly Color BACKGROUND_DARK_WARNING = Color.FromArgb(255, 180, 100, 10);
+        private static readonly Color BACKGROUND_DARK_DANGER = Color.FromArgb(255, 128, 40, 40);
         
         //Expansion Panel colors
         private static readonly Color EXPANSIONPANEL_FOCUS_LIGHT = Color.FromArgb(255, 242, 242, 242);

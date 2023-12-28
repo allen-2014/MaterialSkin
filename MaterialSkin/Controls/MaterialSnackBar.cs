@@ -361,6 +361,7 @@
                 CloseAnimation = true;
                 _AnimationManager.Increment = 0.06;
                 _AnimationManager.OnAnimationFinished += _AnimationManager_OnAnimationFinished;
+                //animation value = 1 -> 0
                 _AnimationManager.StartNewAnimation(AnimationDirection.Out);
             }
             base.OnClosing(e);

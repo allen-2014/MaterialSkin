@@ -10,6 +10,9 @@ namespace MaterialSkinExample
     {
         private readonly MaterialSkinManager materialSkinManager;
 
+        MaterialLoading loadingForm = default;
+        Timer timer = default;
+
         public MainForm()
         {
             InitializeComponent();
@@ -52,6 +55,13 @@ namespace MaterialSkinExample
             };
 
             materialMaskedTextBox1.ValidatingType = typeof(System.Int16);
+
+            materialButton30.Loading = true;
+            materialButton31.Loading = true;
+            materialButton32.Loading = true;
+            materialButton33.Loading = true;
+
+            loadingForm = new MaterialLoading(this);
 
         }
 
@@ -313,6 +323,24 @@ namespace MaterialSkinExample
         {
             MaterialSnackBar SnackBarMessage = new MaterialSnackBar("SnackBar started succesfully,SnackBar started succesfully,SnackBar started succesfully,"  + Environment.NewLine + "SnackBar started succesfully,SnackBar started succesfully,SnackBar started succesfully,SnackBar started succesfully,SnackBar started succesfully", "OK", true, MaterialSnackBar.SnackBarType.Danger);
             SnackBarMessage.Show(this);
+
+        }
+
+        private void materialButton34_Click(object sender, EventArgs e)
+        {
+            //loadingForm = new MaterialLoading(this);
+            loadingForm.Text = "Loading information, please wait...";
+            loadingForm.Loading = true;
+            timer = new Timer();
+            timer.Tick += Timer_Tick;
+            timer.Interval = 5000;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            timer.Stop();
+            loadingForm.Loading = false;
         }
     }
 }

@@ -21,7 +21,9 @@
         private MaterialButton _validationButton = new MaterialButton();
         private MaterialButton _cancelButton = new MaterialButton();
         private AnimationManager _AnimationManager;
+
         private bool CloseAnimation = false;
+        private bool OpenAnimation = false;
         private Form _formOverlay;
         private String _text;
         private String _title;
@@ -75,6 +77,7 @@
             ShowInTaskbar = false;
             Sizable = false;
 
+            Opacity = 0;
             BackColor = SkinManager.BackgroundColor;
             FormStyle = FormStyles.StatusAndActionBar_None;
 
@@ -182,7 +185,9 @@
             base.OnLoad(e);
 
             Location = new Point(Convert.ToInt32(Owner.Location.X + (Owner.Width / 2) - (Width / 2)), Convert.ToInt32(Owner.Location.Y + (Owner.Height/2) - (Height / 2)));
+            //animation value = 0 -> 1
             _AnimationManager.StartNewAnimation(AnimationDirection.In);
+            OpenAnimation = true;
         }
 
         /// <summary>
@@ -190,7 +195,8 @@
         /// </summary>
         void _AnimationManager_OnAnimationProgress(object sender)
         {
-            if (CloseAnimation)
+            //just only use AnimationDirection.In(0->1), not use AnimationDirection.Out(1->0)
+            if (OpenAnimation ||  CloseAnimation)
             {
                 Opacity = _AnimationManager.GetProgress();
             }

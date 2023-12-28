@@ -56,6 +56,12 @@
     <Compile Include="Controls\MaterialDivider2.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MaterialLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\MaterialPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MaterialToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -206,6 +212,30 @@
     <None Include="Resources\SourceHanSansCN-Medium.ttf" />
     <None Include="Resources\SourceHanSansCN-Normal.ttf" />
     <None Include="Resources\SourceHanSansCN-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading_blue.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading_red.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading_dark.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading_blue_65.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading_dark_65.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading_red_65.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading_white_65.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -26,6 +26,7 @@ namespace MaterialSkin.Controls
         private MaterialButton _cancelButton = default;//new MaterialButton();
         private AnimationManager _AnimationManager;
         private bool CloseAnimation = false;
+        private bool OpenAnimation = false;
         private Form _formOverlay;
         private string _text;
         private string _title = string.Empty;
@@ -265,6 +266,7 @@ namespace MaterialSkin.Controls
 
             ShowInTaskbar = false;
             Sizable = false;
+            if(!DesignMode) Opacity = 0;
 
             BackColor = SkinManager.BackgroundColor;
             FormStyle = FormStyles.StatusAndActionBar_None;
@@ -377,7 +379,9 @@ namespace MaterialSkin.Controls
                 _formOverlay.Visible = false;
 
             Location = new Point(Convert.ToInt32(Owner.Location.X + (Owner.Width / 2) - (Width / 2)), Convert.ToInt32(Owner.Location.Y + (Owner.Height / 2) - (Height / 2)));
+            //animation value = 0 -> 1
             _AnimationManager.StartNewAnimation(AnimationDirection.In);
+            OpenAnimation = true;
 
         }
 
@@ -407,7 +411,7 @@ namespace MaterialSkin.Controls
         /// </summary>
         void _AnimationManager_OnAnimationProgress(object sender)
         {
-            if (CloseAnimation)
+            if (OpenAnimation || CloseAnimation)
             {
                 Opacity = _AnimationManager.GetProgress();
             }
