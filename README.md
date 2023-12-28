@@ -1,4 +1,10 @@
 # 更新说明
+2023.12.28
+- MaterialButton新增Loading ICON
+- 新增MaterialLoading 控件
+- radio button，checkbox，textbox，combox增加小号类型
+- 优化部分控件和修复bug
+
 2023.12.17
 - 增加有Title的 MaterialDivider2，可在左，中，右位置添加文本说明
 
