@@ -49,14 +49,14 @@ namespace MaterialSkin.Controls
             }
         }
 
-        private string _text = string.Empty;
+        private string _content = string.Empty;
         [Browsable(false)]
-        public new string Text
+        public  string Content
         {
-            get { return _text; }
+            get { return _content; }
             set
             {
-                _text = value;
+                _content = value;
             }
         }
 
@@ -90,13 +90,13 @@ namespace MaterialSkin.Controls
             Location = new Point(parentForm.Location.X, parentForm.Location.Y);
             //_parentForm = parentForm;
             //
-            loadingIconSize = Size.Width > Size.Height ? Size.Height / 10 : Size.Width / 10;
+            loadingIconSize = 32;//Size.Width > Size.Height ? Size.Height / 10 : Size.Width / 10;
             textRect = new Rectangle(0, 0, Size.Width / 3, Size.Height);
 
             //
             _picBox = new MaterialPictureBox();
             _picBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            _picBox.Image = Properties.Resources.loading;
+            _picBox.Image = Properties.Resources.loading_white_65;
             _picBox.Size = new Size(loadingIconSize, loadingIconSize);
             this.Controls.Add(_picBox);
             //
@@ -168,7 +168,7 @@ namespace MaterialSkin.Controls
             using (NativeTextRenderer NativeText = new NativeTextRenderer(g))
             {
                 NativeText.DrawMultilineTransparentText(
-                    _text,
+                    _content,
                     //CharacterCasing == CharacterCasingEnum.Upper ? base.Text.ToUpper() : CharacterCasing == CharacterCasingEnum.Lower ? base.Text.ToLower() :
                     //    CharacterCasing == CharacterCasingEnum.Title ? CultureInfo.CurrentCulture.TextInfo.ToTitleCase(base.Text.ToLower()) : base.Text,
                     SkinManager.getLogFontByType(MaterialSkinManager.fontType.Button),

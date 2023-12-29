@@ -329,7 +329,7 @@ namespace MaterialSkinExample
         private void materialButton34_Click(object sender, EventArgs e)
         {
             //loadingForm = new MaterialLoading(this);
-            loadingForm.Text = "Loading information, please wait...";
+            loadingForm.Content = "Loading information, please wait...";
             loadingForm.Loading = true;
             timer = new Timer();
             timer.Tick += Timer_Tick;
