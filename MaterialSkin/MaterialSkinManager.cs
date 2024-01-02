@@ -236,12 +236,12 @@
         private static readonly Color BACKGROUND_DISABLED_DARK = Color.FromArgb(25, 255, 255, 255);
         private static readonly Brush BACKGROUND_DISABLED_DARK_BRUSH = new SolidBrush(BACKGROUND_DISABLED_DARK);
         //
-        private static readonly Color BACKGROUND_LIGHT_SUCCESS = Color.FromArgb(255, 240, 249, 236);
-        private static readonly Color BACKGROUND_LIGHT_WARNING = Color.FromArgb(255, 253, 246, 236);
-        private static readonly Color BACKGROUND_LIGHT_DANGER = Color.FromArgb(255, 254, 240, 240);
+        private static readonly Color BACKGROUND_LIGHT_SUCCESS = Color.FromArgb(255, 186, 238, 210);
+        private static readonly Color BACKGROUND_LIGHT_WARNING = Color.FromArgb(255, 251, 240, 163);
+        private static readonly Color BACKGROUND_LIGHT_DANGER = Color.FromArgb(255, 253, 188, 188);
 
-        private static readonly Color BACKGROUND_DARK_SUCCESS = Color.FromArgb(255, 40, 128, 40);
-        private static readonly Color BACKGROUND_DARK_WARNING = Color.FromArgb(255, 180, 100, 10);
+        private static readonly Color BACKGROUND_DARK_SUCCESS = Color.FromArgb(255, 40, 105, 72);
+        private static readonly Color BACKGROUND_DARK_WARNING = Color.FromArgb(255, 176, 100, 33);
         private static readonly Color BACKGROUND_DARK_DANGER = Color.FromArgb(255, 128, 40, 40);
         
         //Expansion Panel colors

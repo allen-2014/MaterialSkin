@@ -342,5 +342,19 @@ namespace MaterialSkinExample
             timer.Stop();
             loadingForm.Loading = false;
         }
+
+        private void materialButton30_Click(object sender, EventArgs e)
+        {
+            this.materialButton30.Loading = true;
+            MaterialSnackBar snackBar = new MaterialSnackBar("This button loading=true");
+            snackBar.Show(this);
+        }
+
+        private void materialButton17_Click(object sender, EventArgs e)
+        {
+            this.materialButton30.Loading = false;
+            MaterialSnackBar snackBar = new MaterialSnackBar("The first loading button loading=false");
+            snackBar.Show(this);
+        }
     }
 }

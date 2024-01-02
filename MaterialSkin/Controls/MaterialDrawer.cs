@@ -176,6 +176,7 @@
                 {
                     _clickAnimManager.SetProgress(0);
                     _clickAnimManager.StartNewAnimation(AnimationDirection.In);
+                    
                 };
                 _baseTabControl.ControlAdded += delegate
                 {

@@ -84,7 +84,6 @@
                 if (_loading)
                 {
                     updateLoadingImage();
-                    
 
                     if (!this.Controls.Contains(_loadingPicBox))
                         this.Controls.Add(_loadingPicBox);
@@ -918,6 +917,31 @@
 
         }
 
+        private const int WM_PAINT = 0xF;
+        /// <summary>
+        /// Prevents the Form from beeing dragged
+        /// </summary>
+        protected override void WndProc(ref Message message)
+        {
+            //const int WM_SYSCOMMAND = 0x0112;
+            //const int SC_MOVE = 0xF010;
+
+            if(message.Msg != WM_PAINT && _loading)
+            {
+                return;
+            }
+
+            //switch (message.Msg)
+            //{
+            //    case WM_PAINT:
+            //        int command = message.WParam.ToInt32() & 0xfff0;
+            //        if (command == SC_MOVE)
+            //            return;
+            //        break;
+            //}
+
+            base.WndProc(ref message);
+        }
         /// <summary>
         /// The GetPreferredSize
         /// </summary>
@@ -988,7 +1012,7 @@
             MouseState = MouseState.OUT;
             MouseEnter += (sender, args) =>
             {
-                if (_loading) return;
+                //if (_loading) return;
 
                 MouseState = MouseState.HOVER;
                 _hoverAnimationManager.StartNewAnimation(AnimationDirection.In);
@@ -996,7 +1020,7 @@
             };
             MouseLeave += (sender, args) =>
             {
-                if (_loading) return;
+                //if (_loading) return;
 
                 MouseState = MouseState.OUT;
                 _hoverAnimationManager.StartNewAnimation(AnimationDirection.Out);
@@ -1004,7 +1028,7 @@
             };
             MouseDown += (sender, args) =>
             {
-                if (_loading) return;
+                //if (_loading) return;
 
                 if (args.Button == MouseButtons.Left)
                 {
@@ -1016,7 +1040,7 @@
             };
             MouseUp += (sender, args) =>
             {
-                if (_loading) return;
+                //if (_loading) return;
 
                 MouseState = MouseState.HOVER;
 
@@ -1025,14 +1049,14 @@
 
             GotFocus += (sender, args) =>
             {
-                if (_loading) return;
+                //if (_loading) return;
 
                 _focusAnimationManager.StartNewAnimation(AnimationDirection.In);
                 Invalidate();
             };
             LostFocus += (sender, args) =>
             {
-                if (_loading) return;
+                //if (_loading) return;
 
                 MouseState = MouseState.OUT;
                 _focusAnimationManager.StartNewAnimation(AnimationDirection.Out);
@@ -1041,7 +1065,7 @@
 
             PreviewKeyDown += (object sender, PreviewKeyDownEventArgs e) =>
             {
-                if (_loading) return;
+                //if (_loading) return;
 
                 if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
                 {
@@ -1049,6 +1073,8 @@
                     Invalidate();
                 }
             };
+
+            
         }
 
     }

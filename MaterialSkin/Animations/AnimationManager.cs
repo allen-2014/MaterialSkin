@@ -207,8 +207,6 @@
                 if (Singular && _animationDirections.Count > 0)
                 {
                     _animationDirections[0] = animationDirection;
-                    //reset init value
-                    ResetProgress(0);
                 }
                 else
                 {
@@ -276,26 +274,6 @@
                 case AnimationDirection.InOutOut:
                 case AnimationDirection.Out:
                     DecrementProgress(index);
-                    break;
-
-                default:
-                    throw new Exception("No AnimationDirection has been set");
-            }
-        }
-
-        public void ResetProgress(int index)
-        {
-            switch (_animationDirections[index])
-            {
-                case AnimationDirection.InOutRepeatingIn:
-                case AnimationDirection.InOutIn:
-                case AnimationDirection.In:
-                case AnimationDirection.InOutRepeatingOut:
-                case AnimationDirection.InOutOut:
-                    _animationProgresses[index] = MIN_VALUE;
-                    break;
-                case AnimationDirection.Out:
-                    _animationProgresses[index] = MAX_VALUE;
                     break;
 
                 default:

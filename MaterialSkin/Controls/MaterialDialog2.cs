@@ -79,7 +79,7 @@ namespace MaterialSkin.Controls
             }
         }
 
-        [Category("MaterialDialog2")]
+        [Category("MaterialDialog2"), Localizable(true)]
         public string Title
         {
             get { return _title; }

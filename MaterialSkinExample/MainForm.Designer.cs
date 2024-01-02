@@ -65,6 +65,8 @@ namespace MaterialSkinExample
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.item3ToolStripMenuItem = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.materialLinkLabel1 = new MaterialSkin.Controls.MaterialLinkLabel();
+            this.materialButton34 = new MaterialSkin.Controls.MaterialButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.materialButton26 = new MaterialSkin.Controls.MaterialButton();
             this.materialButton25 = new MaterialSkin.Controls.MaterialButton();
@@ -235,7 +237,6 @@ namespace MaterialSkinExample
             this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel54 = new MaterialSkin.Controls.MaterialLabel();
             this.menuIconList = new System.Windows.Forms.ImageList(this.components);
-            this.materialButton34 = new MaterialSkin.Controls.MaterialButton();
             this.materialTabControl1.SuspendLayout();
             this.materialContextMenuStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -393,6 +394,7 @@ namespace MaterialSkinExample
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.materialLinkLabel1);
             this.tabPage1.Controls.Add(this.materialButton34);
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.materialButton26);
@@ -427,6 +429,48 @@ namespace MaterialSkinExample
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             // 
+            // materialLinkLabel1
+            // 
+            this.materialLinkLabel1.AutoSize = true;
+            this.materialLinkLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.materialLinkLabel1.Depth = 0;
+            this.materialLinkLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLinkLabel1.HighEmphasis = true;
+            this.materialLinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.materialLinkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.materialLinkLabel1.Location = new System.Drawing.Point(330, 144);
+            this.materialLinkLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLinkLabel1.Name = "materialLinkLabel1";
+            this.materialLinkLabel1.Size = new System.Drawing.Size(137, 19);
+            this.materialLinkLabel1.TabIndex = 45;
+            this.materialLinkLabel1.TabStop = true;
+            this.materialLinkLabel1.Text = "materialLinkLabel1";
+            // 
+            // materialButton34
+            // 
+            this.materialButton34.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton34.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton34.Depth = 0;
+            this.materialButton34.HighEmphasis = true;
+            this.materialButton34.Icon = null;
+            this.materialButton34.IconSize = 24;
+            this.materialButton34.Loading = false;
+            this.materialButton34.Location = new System.Drawing.Point(421, 197);
+            this.materialButton34.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton34.MaterialToolTip = null;
+            this.materialButton34.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialButton34.Name = "materialButton34";
+            this.materialButton34.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButton34.Size = new System.Drawing.Size(127, 36);
+            this.materialButton34.TabIndex = 44;
+            this.materialButton34.Text = "SHOW LOADING";
+            this.materialButton34.ToolTipDuration = 0;
+            this.materialButton34.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.BottomCenter;
+            this.materialButton34.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton34.UseAccentColor = false;
+            this.materialButton34.UseVisualStyleBackColor = true;
+            this.materialButton34.Click += new System.EventHandler(this.materialButton34_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
@@ -455,7 +499,7 @@ namespace MaterialSkinExample
             this.materialButton26.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton26.Size = new System.Drawing.Size(126, 36);
             this.materialButton26.TabIndex = 41;
-            this.materialButton26.Text = "Show Dialog2";
+            this.materialButton26.Text = "SHOW DIALOG2";
             this.materialButton26.ToolTipCaption = null;
             this.materialButton26.ToolTipDuration = 0;
             this.materialButton26.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -481,7 +525,7 @@ namespace MaterialSkinExample
             this.materialButton25.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton25.Size = new System.Drawing.Size(117, 36);
             this.materialButton25.TabIndex = 41;
-            this.materialButton25.Text = "Show Dialog";
+            this.materialButton25.Text = "SHOW DIALOG";
             this.materialButton25.ToolTipCaption = null;
             this.materialButton25.ToolTipDuration = 0;
             this.materialButton25.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -507,7 +551,7 @@ namespace MaterialSkinExample
             this.materialButton29.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton29.Size = new System.Drawing.Size(142, 36);
             this.materialButton29.TabIndex = 41;
-            this.materialButton29.Text = "Warn SnackBar";
+            this.materialButton29.Text = "WARN SNACKBAR";
             this.materialButton29.ToolTipCaption = null;
             this.materialButton29.ToolTipDuration = 0;
             this.materialButton29.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -533,7 +577,7 @@ namespace MaterialSkinExample
             this.materialButton28.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton28.Size = new System.Drawing.Size(157, 36);
             this.materialButton28.TabIndex = 41;
-            this.materialButton28.Text = "Danger SnackBar";
+            this.materialButton28.Text = "DANGER SNACKBAR";
             this.materialButton28.ToolTipCaption = null;
             this.materialButton28.ToolTipDuration = 0;
             this.materialButton28.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -559,7 +603,7 @@ namespace MaterialSkinExample
             this.materialButton27.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton27.Size = new System.Drawing.Size(172, 36);
             this.materialButton27.TabIndex = 41;
-            this.materialButton27.Text = "Successs SnackBar";
+            this.materialButton27.Text = "SUCCESSS SNACKBAR";
             this.materialButton27.ToolTipCaption = null;
             this.materialButton27.ToolTipDuration = 0;
             this.materialButton27.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -599,7 +643,7 @@ namespace MaterialSkinExample
             this.materialButton6.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton6.Size = new System.Drawing.Size(132, 36);
             this.materialButton6.TabIndex = 41;
-            this.materialButton6.Text = "Info SnackBar";
+            this.materialButton6.Text = "INFO SNACKBAR";
             this.materialButton6.ToolTipCaption = null;
             this.materialButton6.ToolTipDuration = 0;
             this.materialButton6.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -722,7 +766,7 @@ namespace MaterialSkinExample
             this.MaterialButton3.NoAccentTextColor = System.Drawing.Color.Empty;
             this.MaterialButton3.Size = new System.Drawing.Size(119, 36);
             this.MaterialButton3.TabIndex = 36;
-            this.MaterialButton3.Text = "Message box";
+            this.MaterialButton3.Text = "MESSAGE BOX";
             this.MaterialButton3.ToolTipCaption = null;
             this.MaterialButton3.ToolTipDuration = 0;
             this.MaterialButton3.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -846,7 +890,7 @@ namespace MaterialSkinExample
             this.materialButton7.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton7.Size = new System.Drawing.Size(130, 36);
             this.materialButton7.TabIndex = 0;
-            this.materialButton7.Text = "Change Theme";
+            this.materialButton7.Text = "CHANGE THEME";
             this.materialButton7.ToolTipCaption = null;
             this.materialButton7.ToolTipDuration = 0;
             this.materialButton7.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -976,7 +1020,7 @@ namespace MaterialSkinExample
             this.materialButton32.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton32.Size = new System.Drawing.Size(165, 33);
             this.materialButton32.TabIndex = 64;
-            this.materialButton32.Text = "Loading...";
+            this.materialButton32.Text = "LOADING...";
             this.materialButton32.ToolTipDuration = 0;
             this.materialButton32.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.BottomCenter;
             this.materialButton32.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -1001,7 +1045,7 @@ namespace MaterialSkinExample
             this.materialButton31.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton31.Size = new System.Drawing.Size(165, 33);
             this.materialButton31.TabIndex = 64;
-            this.materialButton31.Text = "Loading...";
+            this.materialButton31.Text = "LOADING...";
             this.materialButton31.ToolTipDuration = 0;
             this.materialButton31.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.BottomCenter;
             this.materialButton31.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -1026,7 +1070,7 @@ namespace MaterialSkinExample
             this.materialButton33.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton33.Size = new System.Drawing.Size(165, 33);
             this.materialButton33.TabIndex = 64;
-            this.materialButton33.Text = "Loading...";
+            this.materialButton33.Text = "LOADING...";
             this.materialButton33.ToolTipDuration = 0;
             this.materialButton33.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.BottomCenter;
             this.materialButton33.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
@@ -1051,12 +1095,13 @@ namespace MaterialSkinExample
             this.materialButton30.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton30.Size = new System.Drawing.Size(165, 33);
             this.materialButton30.TabIndex = 64;
-            this.materialButton30.Text = "Loading...";
+            this.materialButton30.Text = "LOADING...";
             this.materialButton30.ToolTipDuration = 0;
             this.materialButton30.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.BottomCenter;
             this.materialButton30.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton30.UseAccentColor = false;
             this.materialButton30.UseVisualStyleBackColor = true;
+            this.materialButton30.Click += new System.EventHandler(this.materialButton30_Click);
             // 
             // materialButton23
             // 
@@ -1159,7 +1204,6 @@ namespace MaterialSkinExample
             this.materialButton24.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialButton24.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.materialButton24.Depth = 0;
-            this.materialButton24.Enabled = false;
             this.materialButton24.HighEmphasis = false;
             this.materialButton24.Icon = global::MaterialSkinExample.Properties.Resources.baseline_bluetooth_black_24dp;
             this.materialButton24.IconSize = 24;
@@ -1224,7 +1268,6 @@ namespace MaterialSkinExample
             this.materialButton19.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialButton19.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.materialButton19.Depth = 0;
-            this.materialButton19.Enabled = false;
             this.materialButton19.HighEmphasis = false;
             this.materialButton19.Icon = null;
             this.materialButton19.IconSize = 24;
@@ -1303,7 +1346,6 @@ namespace MaterialSkinExample
             this.materialButton5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialButton5.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.materialButton5.Depth = 0;
-            this.materialButton5.Enabled = false;
             this.materialButton5.HighEmphasis = true;
             this.materialButton5.Icon = null;
             this.materialButton5.IconSize = 24;
@@ -1409,7 +1451,6 @@ namespace MaterialSkinExample
             this.materialButton17.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialButton17.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.materialButton17.Depth = 0;
-            this.materialButton17.Enabled = false;
             this.materialButton17.HighEmphasis = false;
             this.materialButton17.Icon = null;
             this.materialButton17.IconSize = 24;
@@ -1429,6 +1470,7 @@ namespace MaterialSkinExample
             this.materialButton17.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
             this.materialButton17.UseAccentColor = true;
             this.materialButton17.UseVisualStyleBackColor = true;
+            this.materialButton17.Click += new System.EventHandler(this.materialButton17_Click);
             // 
             // materialButton16
             // 
@@ -1436,7 +1478,6 @@ namespace MaterialSkinExample
             this.materialButton16.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialButton16.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.materialButton16.Depth = 0;
-            this.materialButton16.Enabled = false;
             this.materialButton16.HighEmphasis = true;
             this.materialButton16.Icon = null;
             this.materialButton16.IconSize = 24;
@@ -2965,7 +3006,7 @@ namespace MaterialSkinExample
             this.materialFlatButton2.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialFlatButton2.Size = new System.Drawing.Size(107, 36);
             this.materialFlatButton2.TabIndex = 1;
-            this.materialFlatButton2.Text = "Remove";
+            this.materialFlatButton2.Text = "REMOVE";
             this.materialFlatButton2.ToolTipCaption = null;
             this.materialFlatButton2.ToolTipDuration = 0;
             this.materialFlatButton2.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -3022,7 +3063,7 @@ namespace MaterialSkinExample
             this.MaterialButton2.NoAccentTextColor = System.Drawing.Color.Empty;
             this.MaterialButton2.Size = new System.Drawing.Size(78, 36);
             this.MaterialButton2.TabIndex = 2;
-            this.MaterialButton2.Text = "Add";
+            this.MaterialButton2.Text = "ADD";
             this.MaterialButton2.ToolTipCaption = null;
             this.MaterialButton2.ToolTipDuration = 0;
             this.MaterialButton2.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -3156,7 +3197,7 @@ namespace MaterialSkinExample
             this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton1.Size = new System.Drawing.Size(64, 36);
             this.materialButton1.TabIndex = 1;
-            this.materialButton1.Text = "Nice!";
+            this.materialButton1.Text = "NICE!";
             this.materialButton1.ToolTipCaption = null;
             this.materialButton1.ToolTipDuration = 0;
             this.materialButton1.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.LeftTop;
@@ -3876,31 +3917,6 @@ namespace MaterialSkinExample
             this.menuIconList.Images.SetKeyName(16, "round_error_black_24dp.png");
             this.menuIconList.Images.SetKeyName(17, "round_event_black_24dp.png");
             // 
-            // materialButton34
-            // 
-            this.materialButton34.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton34.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton34.Depth = 0;
-            this.materialButton34.HighEmphasis = true;
-            this.materialButton34.Icon = null;
-            this.materialButton34.IconSize = 24;
-            this.materialButton34.Loading = false;
-            this.materialButton34.Location = new System.Drawing.Point(421, 197);
-            this.materialButton34.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton34.MaterialToolTip = null;
-            this.materialButton34.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialButton34.Name = "materialButton34";
-            this.materialButton34.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton34.Size = new System.Drawing.Size(127, 36);
-            this.materialButton34.TabIndex = 44;
-            this.materialButton34.Text = "Show Loading";
-            this.materialButton34.ToolTipDuration = 0;
-            this.materialButton34.ToolTipPlacement = MaterialSkin.Controls.MaterialToolTipPlacement.BottomCenter;
-            this.materialButton34.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton34.UseAccentColor = false;
-            this.materialButton34.UseVisualStyleBackColor = true;
-            this.materialButton34.Click += new System.EventHandler(this.materialButton34_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -4136,5 +4152,6 @@ namespace MaterialSkinExample
         private MaterialButton materialButton30;
         private MaterialButton materialButton33;
         private MaterialButton materialButton34;
+        private MaterialLinkLabel materialLinkLabel1;
     }
 }

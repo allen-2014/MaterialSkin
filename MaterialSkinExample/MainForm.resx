@@ -120,6 +120,12 @@
   <metadata name="materialContextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>35, 13</value>
   </metadata>
+  <data name="materialLabel8.Text" xml:space="preserve">
+    <value>Here is a list of every variant a Material Button can be. Contained button's shadows are only drawn at run-time.
+Click on them and checkout those sweet animations. Oh yeah, the buttons follow the theme and colors, try changing those too.
+Normally the buttons should be AutoSize = true, but for the sake of my OCD, it's set to false here
+If any of the buttons looks weird while designing, change the tab background color from transparent to white.</value>
+  </data>
   <metadata name="menuIconList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>219, 17</value>
   </metadata>
@@ -128,7 +134,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABs
-        NgAAAk1TRnQBSQFMAgEBEgEAAVgBCAFYAQgBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        NgAAAk1TRnQBSQFMAgEBEgEAAdABCAHQAQgBGAEAARgBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABeAMAAQEBAAEgBgABtP8A/wD/ADEAAwwBEAM9AWcDWAG7A1wB5wMAAf8DAAH/A10B4wNUAa8DOQFf
         AwYBCCgAAy8BSQNdAeMDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMA
         Af8DAAH/AwAB/wNdAeMDLgFI5AADPgFrA2AB6wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
@@ -362,12 +368,6 @@
         AfgBAAEfAeABAAEHAf4BAAF/AfgB4AH/AfgBAAEfAeABAAEHAf8BAAL/AeEB/wH4AQABHwHgAQABBwT/
         AeMB/wH4AQABHwf/Aecc/ws=
 </value>
-  </data>
-  <data name="materialLabel8.Text" xml:space="preserve">
-    <value>Here is a list of every variant a Material Button can be. Contained button's shadows are only drawn at run-time.
-Click on them and checkout those sweet animations. Oh yeah, the buttons follow the theme and colors, try changing those too.
-Normally the buttons should be AutoSize = true, but for the sake of my OCD, it's set to false here
-If any of the buttons looks weird while designing, change the tab background color from transparent to white.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>50</value>

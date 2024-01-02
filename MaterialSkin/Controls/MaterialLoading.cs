@@ -152,6 +152,7 @@ namespace MaterialSkin.Controls
             {
                 //animation value =0 -> 1
                 _AnimationManager.Increment = 0.03;
+                _AnimationManager.SetProgress(0);
                 _AnimationManager.StartNewAnimation(AnimationDirection.In);
                 OpenAnimation = true;
             }

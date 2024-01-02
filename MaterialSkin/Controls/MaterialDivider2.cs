@@ -43,7 +43,7 @@
 
 
         private string _title = string.Empty;
-        [Category("Material")]
+        [Category("Material"), Localizable(true)]
         public string Title
         {
             get
